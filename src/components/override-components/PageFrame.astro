@@ -1,6 +1,5 @@
 ---
 import MobileMenuToggle from "./MobileMenuToggle.astro";
-import Footer from "./Footer.astro";
 import CTA from "../CTA.astro";
 import SidebarNav from "../SidebarNav.astro";
 import ImageMod from "../ImageMod.astro";
@@ -71,7 +70,6 @@ const { hasSidebar } = Astro.locals.starlightRoute;
     </div>
   </div>
   {!hasSidebar && <CTA />}
-  {!hasSidebar && <Footer />}
 </div>
 
 <style>
@@ -99,9 +97,6 @@ const { hasSidebar } = Astro.locals.starlightRoute;
     }
     .sidebar button:where(.astro-jif73yzw) {
       top: 14px !important;
-    }
-    footer {
-      display: none;
     }
     @media (max-width: 800px) {
       .header {

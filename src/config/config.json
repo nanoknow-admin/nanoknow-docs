@@ -12,10 +12,6 @@
     "theme_switcher": false
   },
   "params": {
-    "footer_contact": {
-      "enable": true,
-      "action": "#"
-    },
     "copyright": "Designed and Developed by <a class=\"text-primary hover:underline no-underline\" href=\"https://samantharoberts.com\" target=\"_blank\" rel=\"noopener\" aria-label=\"Samantha Roberts\">NanoKnow</a>. Copyright &copy; 2025."
   },
   "navigation_button": {

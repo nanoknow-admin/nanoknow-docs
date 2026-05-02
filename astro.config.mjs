@@ -44,8 +44,7 @@ export default defineConfig({
         ContentPanel: "./src/components/override-components/ContentPanel.astro",
         Pagination: "./src/components/override-components/Pagination.astro",
         Sidebar: "./src/components/override-components/Sidebar.astro",
-        
-        
+        Footer: "./src/components/override-components/Footer.astro",
       },
       
     }),
