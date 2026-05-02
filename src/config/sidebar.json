@@ -5,6 +5,10 @@
       "slug": "vision"
     },
     {
+      "label": "Members",
+      "slug": "members"
+    },
+    {
       "label": "Blog",
       "slug": "blog"
     }

@@ -1,0 +1,51 @@
+---
+title: ""
+description: NanoKnow member facilities and partnerships
+template: splash
+---
+
+import Section from "~/components/Section.astro";
+import Grid from "~/components/user-components/Grid.astro";
+import LogoCard from "~/components/user-components/LogoCard.astro";
+import LinkButton from "~/components/LinkButton.astro";
+
+import combinedLogo from "~/assets/nanofab_logos/CNF_PMI_ASRC_SNF_combined_logos.png";
+import stanfordLogo from "~/assets/nanofab_logos/stanford_at_nano_transparent.png";
+import pmiLogo from "~/assets/nanofab_logos/PMI-color-transbkgd.png";
+import cornellLogo from "~/assets/nanofab_logos/cornell_cnf_transparent.png";
+import asrcLogo from "~/assets/nanofab_logos/ASRC_GC_Color.png";
+
+<Section title='<span style="color: #1354A2;">Our</span> <span style="color: #FFC500;">Members</span>' description='<span style="color: #fff;">Partnering to advance nanofabrication knowledge</span>' titleClass="text-7xl">
+
+{/* <div style="margin: 2rem auto 3rem; max-width: 800px; text-align: center; background: #fff; border-radius: 1rem; padding: 3rem 4rem;">
+  <img src={combinedLogo.src} alt="NanoKnow member facility logos" style="max-width: 100%; height: auto;" />
+</div> */}
+
+<div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; max-width: 1100px; margin: 0 auto;">
+  <LogoCard
+    src={stanfordLogo.src}
+    alt="Stanford nano@stanford"
+    name="Stanford nano@stanford"
+    href="https://nanolabs.stanford.edu/"
+  />
+  <LogoCard
+    src={cornellLogo.src}
+    alt="Cornell NanoScale Science and Technology Facility"
+    name="Cornell CNF"
+    href="https://www.cnf.cornell.edu/"
+  />
+  <LogoCard
+    src={pmiLogo.src}
+    alt="Princeton Materials Institute"
+    name="Princeton Materials Institute"
+    href="https://mnfc.princeton.edu/"
+  />
+  <LogoCard
+    src={asrcLogo.src}
+    alt="Advanced Science Research Center, CUNY"
+    name="CUNY ASRC"
+    href="https://asrc.gc.cuny.edu/facilities/nanofabrication/"
+  />
+</div>
+
+</Section>

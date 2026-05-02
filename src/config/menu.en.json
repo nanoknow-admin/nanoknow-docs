@@ -13,6 +13,10 @@
       "url": "/facilities/"
     },
     {
+      "name": "Members",
+      "url": "/members/"
+    },
+    {
       "name": "Get Involved",
       "url": "/get-involved/"
     }

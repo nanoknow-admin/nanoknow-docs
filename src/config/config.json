@@ -9,7 +9,7 @@
   },
   "settings": {
     "search": true,
-    "theme_switcher": true
+    "theme_switcher": false
   },
   "params": {
     "footer_contact": {
