@@ -265,6 +265,16 @@ function applyFilters() {
   document.getElementById("subtitle").textContent =
     shown + " facilities across " + statesShown + " states";
 }
+
+function notifyParentHeight() {
+  var h = document.documentElement.scrollHeight;
+  window.parent.postMessage({ type: 'facilityListHeight', height: h }, '*');
+}
+new ResizeObserver(notifyParentHeight).observe(document.body);
+document.querySelectorAll('details.state').forEach(function(d) {
+  d.addEventListener('toggle', notifyParentHeight);
+});
+window.addEventListener('load', notifyParentHeight);
 </script>
 
 </body>
