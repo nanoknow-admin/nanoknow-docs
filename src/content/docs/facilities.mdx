@@ -6,15 +6,35 @@ template: splash
 
 import Section from "~/components/Section.astro";
 
-<Section title='<span style="color: #1354A2;">Nanofabrication</span> <span style="color: #FFC500;">Facilities</span>' description="US Nanofabrication Facility Directory" titleClass="text-7xl">
+<Section title='<span style="color: #1354A2;">Nanofabrication</span> <span style="color: #FFC500;">Facilities</span>' description="Explore over 170 shared nanofabrication facilities across the United States" titleClass="text-7xl">
 
-<div style="margin: 2rem auto; max-width: 800px;">
+<div style="margin: 2rem auto; max-width: 1200px;">
+  <iframe
+    src="/nanofab_map.html"
+    width="100%"
+    height="600"
+    style="border: 1px solid #333; border-radius: 8px; height: 600px !important; min-height: 600px !important;"
+    title="Nanofabrication facilities map"
+  ></iframe>
+  <p style="text-align: center; color: #6c757d; font-size: 0.85rem; margin-top: 0.5rem;">
+    Click markers to view details · Scroll to zoom · Drag to pan
+  </p>
+</div>
+
+<div style="margin: 3rem auto 1rem; max-width: 800px; text-align: center;">
+  <h2 style="font-size: 2.2rem; margin-bottom: 0.25rem;">
+    <span style="color: #1354A2;">US Facility Directory</span> <span style="color: #FFC500;">by State</span>
+  </h2>
+  <p style="color: #6c757d; font-size: 1rem;">University and government nanofabrication facilities with links</p>
+</div>
+
+<div style="margin: 1rem auto; max-width: 800px;">
   <iframe
     src="/nanofab_facility_link_list.html"
     width="100%"
     height="900"
     style="border: 1px solid #333; border-radius: 8px; min-height: 900px;"
-    title="US Nanofabrication Facilities"
+    title="US Nanofabrication Facilities list"
   ></iframe>
 </div>
 

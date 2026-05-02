@@ -8430,5 +8430,21 @@
             ).addTo(map_cb93c08d46ee74fe89300154e37cdfa7);
 
         
+            var ResetControl = L.Control.extend({
+                options: { position: 'topleft' },
+                onAdd: function() {
+                    var btn = L.DomUtil.create('button', 'leaflet-bar');
+                    btn.innerHTML = '⟲ Reset';
+                    btn.title = 'Reset map view';
+                    btn.style.cssText = 'background:#fff;border:none;padding:5px 10px;cursor:pointer;font-size:14px;font-weight:600;color:#333;';
+                    btn.onmouseover = function(){ btn.style.background='#f4f4f4'; };
+                    btn.onmouseout = function(){ btn.style.background='#fff'; };
+                    L.DomEvent.disableClickPropagation(btn);
+                    btn.onclick = function(){ map_cb93c08d46ee74fe89300154e37cdfa7.setView([37.0902, -95.7129], 4); };
+                    return btn;
+                }
+            });
+            new ResetControl().addTo(map_cb93c08d46ee74fe89300154e37cdfa7);
+        
 </script>
 </html>
