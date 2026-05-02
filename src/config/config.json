@@ -12,7 +12,7 @@
     "theme_switcher": false
   },
   "params": {
-    "copyright": "Designed and Developed by <a class=\"text-primary hover:underline no-underline\" href=\"https://samantharoberts.com\" target=\"_blank\" rel=\"noopener\" aria-label=\"Samantha Roberts\">NanoKnow</a>. Copyright &copy; 2025."
+    "copyright": "Designed and Developed by <span style=\"color: #FFC500;\">NanoKnow Inc.</span> &copy; 2026 &nbsp;|&nbsp; <span style=\"color: #FFC500;\">NanoKnow&trade;</span> is a trademark of <span style=\"color: #FFC500;\">NanoKnow Inc.</span>"
   },
   "navigation_button": {
     "enable": true,
