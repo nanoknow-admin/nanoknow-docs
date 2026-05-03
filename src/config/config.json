@@ -12,7 +12,7 @@
     "theme_switcher": false
   },
   "params": {
-    "copyright": "Designed and Developed by <span style=\"color: #FFC500;\">NanoKnow Inc.</span> &copy; 2026 &nbsp;|&nbsp; <span style=\"color: #FFC500;\">NanoKnow&trade;</span> is a trademark of <span style=\"color: #FFC500;\">NanoKnow Inc.</span>"
+    "copyright": "NanoKnow Inc. &copy; 2026 &nbsp;|&nbsp; NanoKnow is a trademark of NanoKnow Inc."
   },
   "navigation_button": {
     "enable": true,
