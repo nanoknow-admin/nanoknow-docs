@@ -9,16 +9,21 @@
       "url": "/vision/"
     },
     {
-      "name": "Facilities",
-      "url": "/facilities/"
-    },
-    {
       "name": "Members",
       "url": "/members/"
     },
     {
       "name": "Get Involved",
       "url": "/get-involved/"
+    },
+    {
+      "name": "Resources",
+      "hasChildren": true,
+      "children": [
+        { "name": "US Facilities", "url": "/facilities/" },
+        { "name": "Community Forum", "url": "https://forum.nanoknow.org/" },
+        { "name": "Nanobot Chat", "url": "https://nanobot.chat/" }
+      ]
     }
   ],
   "footer": {

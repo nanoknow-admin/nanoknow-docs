@@ -1,5 +1,4 @@
 ---
-import Search from "./Search.astro";
 const { data } = Astro.locals.starlightRoute.entry;
 const { title = data.title, tagline } = data.hero || {};
 const { sidebar } = Astro.locals.starlightRoute;
@@ -28,12 +27,6 @@ const is404 = Astro.locals.starlightRoute?.id === "404";
   {
     !is404 && (
       <div class="mt-12 max-w-4xl">
-        <div class="search-container rounded-2xl p-2 mb-6">
-          <div class="search-bar">
-            <Search />
-          </div>
-        </div>
-
         <div class="flex justify-center items-center flex-wrap gap-4">
           <p class="text-base font-normal">
             Quick Links:
@@ -96,13 +89,6 @@ const is404 = Astro.locals.starlightRoute?.id === "404";
     :root[data-theme="light"] .tagline-custom {
       color: #2C2C2C !important;
     }
-    .search-container {
-      width: 90%;
-      margin: auto;
-      border: 1px solid
-        color-mix(in srgb, var(--sl-color-white) 5%, transparent);
-    }
-
     .badges {
       background-color: color-mix(
         in srgb,
@@ -135,9 +121,6 @@ const is404 = Astro.locals.starlightRoute?.id === "404";
         font-size: 3.5rem !important;
         line-height: 3.5rem !important;
         letter-spacing: -2px;
-      }
-      .search-container {
-        width: 100%;
       }
     }
   }
