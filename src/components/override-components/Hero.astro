@@ -24,47 +24,6 @@ const is404 = Astro.locals.starlightRoute?.id === "404";
   {title && <h1 set:html={title} class="mb-8 text-center rounded-2xl" />}
   {tagline && <p set:html={tagline} class="tagline-custom text-center" />}
 
-  {
-    !is404 && (
-      <div class="mt-12 max-w-4xl">
-        <div class="flex justify-center items-center flex-wrap gap-4">
-          <p class="text-base font-normal">
-            Quick Links:
-          </p>
-          <div class="flex gap-4 badges px-3 py-2.5 rounded-xl flex-wrap justify-center">
-            <div class="badge rounded-lg px-2 py-1.5 group transition">
-              <a
-                class="cursor-pointer badge-link no-underline group-hover:text-black dark:group-hover:text-white transition-colors"
-                href="/vision/"
-              >
-                The NanoKnow Vision
-              </a>
-            </div>
-            <div class="badge rounded-lg px-2 py-1.5 group transition">
-              <a
-                class="cursor-pointer badge-link no-underline group-hover:text-black dark:group-hover:text-white transition-colors"
-                href="https://forum.nanoknow.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Community Forum
-              </a>
-            </div>
-            <div class="badge rounded-lg px-2 py-1.5 group transition">
-              <a
-                class="cursor-pointer badge-link no-underline group-hover:text-black dark:group-hover:text-white transition-colors"
-                href="https://nanobot.chat/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Nanobot Chat
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
 </div>
 
 <style>
@@ -83,39 +42,12 @@ const is404 = Astro.locals.starlightRoute?.id === "404";
     @media (min-width: 1024px) {
       .tagline-custom {
         padding-left: 8rem;
-        margin-top: -3rem;
+        margin-top: -4rem;
       }
     }
     :root[data-theme="light"] .tagline-custom {
       color: #2C2C2C !important;
     }
-    .badges {
-      background-color: color-mix(
-        in srgb,
-        var(--sl-color-white) 3%,
-        transparent
-      );
-    }
-    .badge {
-      background: color-mix(in srgb, var(--sl-color-white) 7%, transparent);
-      font-size: 14px;
-    }
-    .badge:hover {
-      background: color-mix(in srgb, var(--sl-color-white) 15%, transparent);
-    }
-    .badge-link {
-      color: var(--sl-color-white);
-    }
-    :root[data-theme="light"] .badge {
-      background: rgba(0, 0, 0, 0.08);
-    }
-    :root[data-theme="light"] .badge:hover {
-      background: rgba(0, 0, 0, 0.15);
-    }
-    :root[data-theme="light"] .badge-link {
-      color: #2C2C2C;
-    }
-
     @media (max-width: 940px) {
       h1 {
         font-size: 3.5rem !important;
