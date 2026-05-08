@@ -22,15 +22,33 @@ We envision a world where nanofabrication knowledge is accessible to all — whe
 </div>
 
 
-<div style="margin: 3rem auto; max-width: 1200px;">
+<div class="vision-map-container" style="margin: 3rem auto; max-width: 1200px;">
   <iframe 
     src="/nanofab_map.html" 
     width="100%" 
-    height="600" 
-    style="border: 1px solid #333; border-radius: 8px; height: 600px !important; min-height: 600px !important;"
+    style="border: 1px solid #333; border-radius: 8px; height: 600px;"
     title="Nanofabrication facilities map"
   ></iframe>
+  <p style="text-align: center; margin-top: 0.5rem;">
+    <a href="/nanofab_map.html" target="_blank" rel="noopener" style="color: #1354A2; font-size: 0.9rem; text-decoration: underline;">View fullscreen map ↗</a>
+  </p>
 </div>
+
+<style>{`
+  .vision-map-container iframe {
+    height: 350px;
+  }
+  @media (min-width: 640px) {
+    .vision-map-container iframe {
+      height: 450px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .vision-map-container iframe {
+      height: 600px;
+    }
+  }
+`}</style>
 
 <div class="prose dark:prose-invert max-w-4xl mx-auto mb-16 text-lg text-center">
 
