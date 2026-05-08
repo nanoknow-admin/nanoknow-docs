@@ -78,6 +78,12 @@
     display: block;
     margin: 2px 0;
 }
+.leaflet-control-layers-overlays label:nth-child(1) input[type="checkbox"] {
+    accent-color: #0067a3;
+}
+.leaflet-control-layers-overlays label:nth-child(2) input[type="checkbox"] {
+    accent-color: #72b026;
+}
 /* Shrink the Academic-layer inner dot without affecting other glyphs. */
 .awesome-marker i.fa-circle {
     font-size: 10px;
@@ -8403,13 +8409,6 @@
             feature_group_efec016681f781a76d5f8c321a5a996d.addTo(map_cb93c08d46ee74fe89300154e37cdfa7);
         
     
-            var feature_group_1fa05339a69ae048c8ebf08a0304d7c8 = L.featureGroup(
-                {
-}
-            );
-        
-    
-            feature_group_1fa05339a69ae048c8ebf08a0304d7c8.addTo(map_cb93c08d46ee74fe89300154e37cdfa7);
         
     
             var layer_control_f878660033384b706fd80788dd85bfcb_layers = {
@@ -8419,7 +8418,6 @@
                 overlays :  {
                     "\u003cspan style=\"display:inline-block;width:10px;height:10px;border-radius:50%;background:#0067a3;margin-right:6px;vertical-align:middle;\"\u003e\u003c/span\u003eAcademic" : feature_group_b0ace4d059ee5671a2e3204f1bf63908,
                     "\u003cspan style=\"display:inline-block;width:10px;height:10px;border-radius:50%;background:#72b026;margin-right:6px;vertical-align:middle;\"\u003e\u003c/span\u003eGovernment" : feature_group_efec016681f781a76d5f8c321a5a996d,
-                    "\u003cspan style=\"display:inline-block;width:10px;height:10px;border-radius:50%;background:#f69730;margin-right:6px;vertical-align:middle;\"\u003e\u003c/span\u003eIndustry" : feature_group_1fa05339a69ae048c8ebf08a0304d7c8,
                 },
             };
             let layer_control_f878660033384b706fd80788dd85bfcb = L.control.layers(
