@@ -1,0 +1,369 @@
+---
+import facilitiesRaw from "../../data/facilities_verified_geocoded.json";
+
+interface Facility {
+  id: string;
+  institution: string;
+  facility_name_current: string;
+  city: string;
+  state: string;
+  url: string;
+  related_urls: string[];
+  status: string;
+  institution_type: string;
+  lab_type: string;
+  notes: string;
+  duplicate_of: string | null;
+}
+
+const facilities = (facilitiesRaw as Facility[]).filter(
+  (f) => f.status === "verified" && !f.duplicate_of,
+);
+
+// Group by state, sorted alphabetically
+const byState = new Map<string, Facility[]>();
+for (const f of facilities) {
+  const list = byState.get(f.state) ?? [];
+  list.push(f);
+  byState.set(f.state, list);
+}
+const sortedStates = [...byState.keys()].sort();
+
+// Sort facilities within each state by institution name
+for (const list of byState.values()) {
+  list.sort((a, b) => a.institution.localeCompare(b.institution));
+}
+
+const totalCount = facilities.length;
+const uniCount = facilities.filter((f) => f.institution_type === "university").length;
+const govCount = facilities.filter((f) => f.institution_type === "government").length;
+---
+
+<div class="facility-list-root">
+  <p class="subtitle" id="fl-subtitle">
+    {totalCount} facilities across {sortedStates.length} states
+  </p>
+
+  <div class="toolbar">
+    <div class="filter-box">
+      <label><input type="radio" name="fl-filter" value="university" /> University ({uniCount})</label>
+      <label><input type="radio" name="fl-filter" value="government" /> Government ({govCount})</label>
+      <label><input type="radio" name="fl-filter" value="both" checked /> Both ({totalCount})</label>
+    </div>
+    <span class="sep"></span>
+    <button id="fl-expand-all">Expand All Sites</button>
+    <button id="fl-collapse-all">Collapse All Sites</button>
+  </div>
+
+  {sortedStates.map((state) => {
+    const list = byState.get(state)!;
+    const uniInState = list.filter((f) => f.institution_type === "university").length;
+    const govInState = list.filter((f) => f.institution_type === "government").length;
+    const stateSlug = state.toLowerCase().replace(/\s+/g, "-");
+    return (
+      <details
+        class="fl-state"
+        id={`fl-state-${stateSlug}`}
+        open
+        data-uni={uniInState}
+        data-gov={govInState}
+      >
+        <summary>
+          {state} <span class="state-count">({list.length})</span>
+        </summary>
+        {list.map((f) => {
+          const isGov = f.institution_type === "government";
+          const linkColor = isGov ? "#2e7d32" : "#1a73e8";
+          return (
+            <details class="fl-facility" data-type={f.institution_type}>
+              <summary>
+                <span style={`color:${linkColor}`}>
+                  <strong>{f.institution}</strong> &mdash; {f.facility_name_current}
+                </span>
+                {isGov && <span class="badge badge-gov">Gov</span>}
+                <span class="city">({f.city})</span>
+              </summary>
+              {f.url && (
+                <div class="main-site">
+                  <span class="link-label">Main site:</span>{" "}
+                  <a href={f.url} target="_blank" rel="noopener">
+                    {f.url}
+                  </a>
+                </div>
+              )}
+              {f.related_urls.length > 0 && (
+                <div class="additional-links">
+                  <span class="link-label">Additional links:</span>
+                  <ul>
+                    {f.related_urls.map((u) => (
+                      <li>
+                        <a href={u} target="_blank" rel="noopener">
+                          {u}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {!f.url && f.related_urls.length === 0 && (
+                <div class="no-links">No links available</div>
+              )}
+            </details>
+          );
+        })}
+      </details>
+    );
+  })}
+</div>
+
+<style>
+  .facility-list-root {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .subtitle {
+    color: #6c757d;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .toolbar {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .toolbar button {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    color: #495057;
+    user-select: none;
+  }
+  .toolbar button:hover {
+    background: #e9ecef;
+  }
+
+  .filter-box {
+    display: inline-flex;
+    gap: 0.9rem;
+    align-items: center;
+    border: 2px solid #3b5998;
+    border-radius: 6px;
+    padding: 0.4rem 0.9rem;
+    background: #fff;
+  }
+  .filter-box label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.85rem;
+    color: #212529;
+    cursor: pointer;
+    user-select: none;
+  }
+  .filter-box input[type="radio"] {
+    accent-color: #3b5998;
+  }
+
+  .sep {
+    border-left: 1px solid #dee2e6;
+    height: 1.4rem;
+    margin: 0 0.15rem;
+  }
+
+  /* State-level accordion */
+  .fl-state {
+    margin-bottom: 0.5rem;
+    border: 1px solid #3b599833;
+    border-radius: 6px;
+    background: #fff;
+    overflow: hidden;
+  }
+  .fl-state.hidden {
+    display: none;
+  }
+  .fl-state > summary {
+    padding: 0.65rem 1rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    background: #3b5998;
+    color: #f5c542;
+    cursor: pointer;
+    list-style: none;
+  }
+  .fl-state > summary::-webkit-details-marker {
+    display: none;
+  }
+  .fl-state > summary::before {
+    content: "\25B6\FE0E  ";
+    font-size: 0.75rem;
+  }
+  .fl-state[open] > summary::before {
+    content: "\25BC\FE0E  ";
+  }
+  .state-count {
+    font-weight: 400;
+    opacity: 0.8;
+  }
+
+  /* Facility-level accordion */
+  .fl-facility {
+    border-bottom: 1px solid #eee;
+    padding: 0;
+  }
+  .fl-facility.hidden {
+    display: none;
+  }
+  .fl-facility:last-child {
+    border-bottom: none;
+  }
+  .fl-facility > summary {
+    padding: 0.5rem 1rem 0.5rem 1.5rem;
+    cursor: pointer;
+    font-size: 0.88rem;
+    list-style: none;
+  }
+  .fl-facility > summary::-webkit-details-marker {
+    display: none;
+  }
+  .fl-facility > summary::before {
+    content: "\25B8\FE0E ";
+    color: #6c757d;
+  }
+  .fl-facility[open] > summary::before {
+    content: "\25BE\FE0E ";
+  }
+  .fl-facility > summary:hover {
+    background: #f1f3f5;
+  }
+
+  .city {
+    color: #6c757d;
+    font-weight: 400;
+    font-size: 0.82rem;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    vertical-align: middle;
+    font-weight: 600;
+    margin-left: 0.3rem;
+  }
+  .badge-gov {
+    background: #2e7d32;
+    color: #fff;
+  }
+
+  .main-site,
+  .additional-links {
+    padding: 0.3rem 1rem 0.3rem 2.5rem;
+    font-size: 0.82rem;
+  }
+  .main-site {
+    padding-top: 0.5rem;
+  }
+  .additional-links {
+    padding-bottom: 0.5rem;
+  }
+  .link-label {
+    color: #6c757d;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .additional-links ul {
+    list-style: none;
+    padding: 0.15rem 0 0 0;
+    margin: 0;
+  }
+  .additional-links li {
+    padding: 0.1rem 0;
+  }
+  .no-links {
+    padding: 0.25rem 1rem 0.5rem 2.5rem;
+    color: #adb5bd;
+    font-size: 0.82rem;
+  }
+
+  .facility-list-root a {
+    color: #1a73e8;
+    text-decoration: none;
+    word-break: break-all;
+  }
+  .facility-list-root a:hover {
+    text-decoration: underline;
+  }
+  .facility-list-root a:visited {
+    color: #4a148c;
+  }
+</style>
+
+<script>
+  function initFacilityList() {
+    const root = document.querySelector(".facility-list-root");
+    if (!root) return;
+
+    const radios = root.querySelectorAll<HTMLInputElement>('input[name="fl-filter"]');
+    const expandBtn = root.querySelector("#fl-expand-all");
+    const collapseBtn = root.querySelector("#fl-collapse-all");
+    const subtitle = root.querySelector("#fl-subtitle");
+
+    function applyFilters() {
+      const checked = root!.querySelector<HTMLInputElement>(
+        'input[name="fl-filter"]:checked',
+      );
+      const val = checked?.value ?? "both";
+      const showUni = val === "university" || val === "both";
+      const showGov = val === "government" || val === "both";
+      let shown = 0;
+
+      root!.querySelectorAll<HTMLDetailsElement>(".fl-state").forEach((state) => {
+        let visibleInState = 0;
+        state.querySelectorAll<HTMLDetailsElement>(".fl-facility").forEach((fac) => {
+          const t = (fac as HTMLElement).dataset.type;
+          const match =
+            (t === "university" && showUni) || (t === "government" && showGov);
+          fac.classList.toggle("hidden", !match);
+          if (match) visibleInState++;
+        });
+        state.classList.toggle("hidden", visibleInState === 0);
+        const countEl = state.querySelector(".state-count");
+        if (countEl) countEl.textContent = `(${visibleInState})`;
+        shown += visibleInState;
+      });
+
+      const statesShown = root!.querySelectorAll(".fl-state:not(.hidden)").length;
+      if (subtitle) {
+        subtitle.textContent = `${shown} facilities across ${statesShown} states`;
+      }
+    }
+
+    radios.forEach((r) => r.addEventListener("change", applyFilters));
+
+    expandBtn?.addEventListener("click", () => {
+      root!
+        .querySelectorAll<HTMLDetailsElement>(".fl-facility:not(.hidden)")
+        .forEach((d) => (d.open = true));
+    });
+
+    collapseBtn?.addEventListener("click", () => {
+      root!
+        .querySelectorAll<HTMLDetailsElement>(".fl-facility")
+        .forEach((d) => (d.open = false));
+    });
+  }
+
+  document.addEventListener("astro:page-load", initFacilityList);
+  initFacilityList();
+</script>

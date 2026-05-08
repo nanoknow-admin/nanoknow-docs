@@ -5,6 +5,7 @@ template: splash
 ---
 
 import Section from "~/components/Section.astro";
+import FacilityList from "~/components/FacilityList.astro";
 
 <Section title='<span style="color: #1354A2;">Nanofabrication</span> <span style="color: #FFC500;">Facilities</span>' description='<span style="color: #fff;">Explore facilities by geography and find relevant site links</span>' titleClass="text-7xl">
 
@@ -46,14 +47,6 @@ import Section from "~/components/Section.astro";
   <p style="color: #fff; font-size: 1rem;">University and government nanofabrication facilities with links</p>
 </div>
 
-<div style="margin: 1rem auto; max-width: 800px;">
-  <iframe
-    src="/nanofab_facility_link_list.html"
-    width="100%"
-    height="900"
-    style="border: 1px solid #333; border-radius: 8px; min-height: 900px;"
-    title="US Nanofabrication Facilities list"
-  ></iframe>
-</div>
+<FacilityList />
 
 </Section>
