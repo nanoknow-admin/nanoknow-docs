@@ -18,8 +18,8 @@ const is404 = Astro.locals.starlightRoute?.id === "404";
 ---
 
 <div
-  class="hero flex flex-col items-center mx-auto px-4 sm:px-6 lg:px-8 pt-66 pb-16"
-  style="min-height: 856px;"
+  class="hero flex flex-col items-center mx-auto px-4 sm:px-6 lg:px-8 pt-36 md:pt-44 lg:pt-56 pb-16"
+  style="min-height: min(856px, 85vh);"
 >
   {title && <h1 set:html={title} class="mb-8 text-center rounded-2xl" />}
   {tagline && <p set:html={tagline} class="tagline-custom text-center" />}
