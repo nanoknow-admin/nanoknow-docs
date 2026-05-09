@@ -43,9 +43,10 @@ const totalCount = facilities.length;
   </p>
 
   <div class="toolbar">
-    <div class="toolbar-actions">
-      <button id="fl-expand-all">Expand All Sites</button>
-      <button id="fl-collapse-all">Collapse All Sites</button>
+    <div class="filter-group">
+      <button class="filter-btn active" data-filter="both">All</button>
+      <button class="filter-btn" data-filter="university">Academic</button>
+      <button class="filter-btn" data-filter="government">Government</button>
     </div>
   </div>
 
@@ -152,6 +153,44 @@ const totalCount = facilities.length;
     display: flex;
     gap: 0.75rem;
     align-items: center;
+  }
+
+  .filter-group {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    border: 1px solid #4b5563;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .filter-btn {
+    margin: 0;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+    border: none;
+    background: #1f2937;
+    cursor: pointer;
+    color: #9ca3af;
+    user-select: none;
+    transition: background 0.15s, color 0.15s;
+  }
+  .filter-btn:not(:last-child) {
+    border-right: 1px solid #4b5563;
+  }
+  .filter-btn:hover {
+    background: #374151;
+    color: #d1d5db;
+  }
+  .filter-btn.active {
+    background: #1354A2;
+    color: #fff;
+  }
+
+  .fl-facility.fl-hidden {
+    display: none;
+  }
+  .fl-state.fl-hidden {
+    display: none;
   }
 
   /* State-level accordion */
@@ -287,20 +326,36 @@ const totalCount = facilities.length;
     const root = document.querySelector(".facility-list-root");
     if (!root) return;
 
-    const expandBtn = root.querySelector("#fl-expand-all");
-    const collapseBtn = root.querySelector("#fl-collapse-all");
-
-    expandBtn?.addEventListener("click", () => {
-      root!
-        .querySelectorAll<HTMLDetailsElement>(".fl-facility")
-        .forEach((d) => (d.open = true));
+    const filterBtns = root.querySelectorAll<HTMLButtonElement>(".filter-btn");
+    filterBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filterBtns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        applyFilter(btn.dataset.filter || "both");
+      });
     });
 
-    collapseBtn?.addEventListener("click", () => {
-      root!
-        .querySelectorAll<HTMLDetailsElement>(".fl-facility")
-        .forEach((d) => (d.open = false));
-    });
+    function applyFilter(filter: string) {
+      const facilities = root!.querySelectorAll<HTMLElement>(".fl-facility");
+      facilities.forEach((f) => {
+        const type = f.dataset.type;
+        if (filter === "both" || type === filter) {
+          f.classList.remove("fl-hidden");
+        } else {
+          f.classList.add("fl-hidden");
+        }
+      });
+
+      const states = root!.querySelectorAll<HTMLElement>(".fl-state");
+      states.forEach((s) => {
+        const visible = s.querySelectorAll(".fl-facility:not(.fl-hidden)").length;
+        if (visible === 0) {
+          s.classList.add("fl-hidden");
+        } else {
+          s.classList.remove("fl-hidden");
+        }
+      });
+    }
   }
 
   document.addEventListener("astro:page-load", initFacilityList);
