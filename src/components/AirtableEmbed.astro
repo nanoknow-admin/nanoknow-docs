@@ -1,0 +1,44 @@
+---
+interface Props {
+  src: string;
+  buttonText?: string;
+  height?: string;
+}
+
+const { src, buttonText = "Click here to open the sign-up form", height = "1200px" } = Astro.props;
+---
+
+<div class="signup-form-wrapper" style="width: 100%;">
+  <div class="signup-trigger" style="text-align: center;">
+    <button
+      class="load-form-btn"
+      style={`cursor: pointer; background: #1354A2; color: white; padding: 0.75rem 2rem; border-radius: 0.5rem; font-size: 1.1rem; font-weight: 600; border: none;`}
+      data-src={src}
+    >
+      {buttonText}
+    </button>
+  </div>
+  <div class="signup-form" style="display: none; margin-top: 1.5rem;">
+    <iframe
+      class="airtable-embed"
+      frameborder="0"
+      style={`background: transparent; border: 1px solid #ccc; width: 100%; height: ${height}; min-height: ${height};`}
+    ></iframe>
+  </div>
+</div>
+
+<script>
+  document.querySelector('.load-form-btn')?.addEventListener('click', function (this: HTMLElement) {
+    const src = this.dataset.src;
+    const wrapper = this.closest('.signup-form-wrapper');
+    const iframe = wrapper?.querySelector('iframe');
+    const form = wrapper?.querySelector('.signup-form') as HTMLElement;
+    const trigger = wrapper?.querySelector('.signup-trigger') as HTMLElement;
+
+    if (iframe && src) {
+      iframe.src = src;
+      form.style.display = 'block';
+      trigger.style.display = 'none';
+    }
+  });
+</script>

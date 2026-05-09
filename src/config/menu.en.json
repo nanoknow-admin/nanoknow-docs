@@ -13,12 +13,8 @@
       "url": "/members/"
     },
     {
-      "name": "Get Involved",
-      "hasChildren": true,
-      "children": [
-        { "name": "Contribute", "url": "/get-involved/" },
-        { "name": "Sign Up", "url": "/sign-up/" }
-      ]
+      "name": "Sign Up",
+      "url": "/sign-up/"
     },
     {
       "name": "Resources",
