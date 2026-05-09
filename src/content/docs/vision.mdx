@@ -1,0 +1,84 @@
+---
+title: ""
+description: Learn about NanoKnow and our mission to share nanofabrication knowledge
+template: splash
+---
+
+import Section from "~/components/Section.astro";
+import Card from "~/components/user-components/NewCard.astro";
+import Grid from "~/components/user-components/Grid.astro";
+
+
+<div id="vision"></div>
+
+<Section title='<span style="display: block;"><span style="color: #1354A2;">Nano</span><span style="color: #FFC500;">Know</span><sup style="font-size: 0.5em; margin-left: 0.1em; color: #FFC500;">™</sup><span style="color: #1354A2;"> Vision</span></span><span style="display: block; font-size: clamp(1.25rem, 2.8vw, 2rem); line-height: 1.35; letter-spacing: -0.02em; margin-top: 1rem; color: #FFC500; font-weight: 600;">A national network for nanofabrication knowledge</span>'>
+
+<div class="prose dark:prose-invert max-w-4xl mx-auto mb-16 mt-10 text-lg text-left">
+  <p>
+    Across the United States, academic and government nanofabrication facilities generate enormous practical knowledge every day — from tool operation and process development to training, troubleshooting, safety, and research support. Yet much of this knowledge remains local, scattered across individual labs, documents, websites, and staff experience.
+  </p>
+  <p>
+    NanoKnow envisions an open, AI-enabled knowledge platform that connects this distributed expertise so that labs of all sizes can share, discover, and reuse fabrication knowledge across institutional boundaries.
+  </p>
+</div>
+
+<div class="vision-map-container" style="margin: 3rem auto; max-width: 1200px;">
+  <iframe 
+    src="/nanofab_map.html" 
+    width="100%" 
+    style="border: 1px solid #333; border-radius: 8px; height: 600px;"
+    title="Nanofabrication facilities map"
+  ></iframe>
+  <p style="text-align: center; margin-top: 0.75rem; font-size: 0.75rem; color: #888; line-height: 1.6; font-style: italic;">
+    <span style="color: #FFC500; font-style: normal; font-weight: 600;">Figure 1.</span> Map of 172 academic and government nanofabrication facilities in the United States (click to learn more about each facility). These sites illustrate the national nanofabrication ecosystem and are not implied to be NanoKnow partner institutions.
+    <a href="/nanofab_map.html" target="_blank" rel="noopener" style="color: #1354A2; text-decoration: underline;">View fullscreen map ↗</a> · (Your institution not listed? <a href="/contact/" style="color: #1354A2; text-decoration: underline;">Get in touch.</a>)
+  </p>
+</div>
+
+<style>{`
+  .vision-map-container iframe {
+    height: 350px;
+  }
+  @media (min-width: 640px) {
+    .vision-map-container iframe {
+      height: 450px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .vision-map-container iframe {
+      height: 600px;
+    }
+  }
+`}</style>
+
+<div class="prose dark:prose-invert max-w-4xl mx-auto mb-16 mt-10 text-lg text-left">
+  <p>
+    This map shows 172 academic and government nanofabrication facilities across the United States. Together, they illustrate the breadth of the national nanofabrication ecosystem and the need for shared infrastructure that can connect knowledge, documentation, data, and expertise across institutions. These sites represent the broader community NanoKnow is designed to serve and are not implied to be NanoKnow partner institutions.
+  </p>
+  <p>
+    Across this ecosystem, much of the knowledge needed to operate tools, train users, develop processes, troubleshoot failures, and support researchers remains distributed across individual facilities. While each lab has unique capabilities and local expertise, many face similar challenges and often recreate solutions independently.
+  </p>
+  <p>
+    NanoKnow's vision is to provide an open, shared knowledge layer for this community. By connecting documentation, process knowledge, training resources, data, and expert insight through an AI-enabled platform, NanoKnow can help facilities preserve local expertise while making reusable knowledge easier to find, share, and build upon.
+  </p>
+  <p>
+    The goal is a platform open to labs of all sizes and missions — academic, government, nonprofit, and community-serving — so that nanofabrication knowledge can move more easily across institutional boundaries.
+  </p>
+</div>
+
+
+<Grid columns={3}>
+  <Card title="Shared Lab Network" icon="rocket" iconColor="#FFC500">
+    Link nanofabrication labs to foster collaboration and shared learning between academic, government, and industry researchers
+  </Card>
+  
+  <Card title="Living Knowledge Base" icon="open-book" iconColor="#1354A2">
+    Create a living knowledge base that evolves with the field, incorporating new techniques and technologies.
+  </Card>
+  
+  <Card title="AI-Enhanced Access" icon="rocket" iconColor="#FFC500">
+    Leverage AI to surface relevant documentation, training materials, and troubleshooting insights — turning decades of distributed expertise into an accessible, intelligent resource for researchers.
+  </Card>
+</Grid>
+
+</Section>

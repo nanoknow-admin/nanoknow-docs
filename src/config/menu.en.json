@@ -1,12 +1,12 @@
 {
   "main": [
     {
-      "name": "Home",
+      "name": "About",
       "url": "/"
     },
     {
-      "name": "About",
-      "url": "/about/"
+      "name": "Vision",
+      "url": "/vision/"
     },
     {
       "name": "Members",
@@ -45,7 +45,7 @@
       "links": [
         {
           "name": "About nanoKnow",
-          "url": "/about/"
+          "url": "/vision/"
         },
         {
           "name": "Contact Us",

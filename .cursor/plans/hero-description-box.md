@@ -13,11 +13,13 @@ Add a styled bounding box with descriptive text into the hero section of the hom
 
 > NanoKnow is an open AI-enabled knowledge platform for sharing nanofabrication documentation, process expertise, and training resources across labs, institutions, and research communities.
 
-## Changes
+## Steps
 
-### 1. `Hero.astro` — Add description box markup
+### Step 1: Add the description box markup
 
-Insert after the tagline `<p>`, guarded by `!is404`:
+File: `src/components/override-components/Hero.astro`
+
+Insert after the tagline `<p>` (line 25), guarded by `!is404`:
 
 ```astro
 {!is404 && (
@@ -29,23 +31,68 @@ Insert after the tagline `<p>`, guarded by `!is404`:
 )}
 ```
 
-### 2. `Hero.astro` — Add styles
+- [ ] Markup added after tagline
+- [ ] Guarded with `!is404` so it doesn't appear on the 404 page
 
-Add to the existing `<style>` block, inside `@layer starlight.core`:
+### Step 2: Add dark-mode styles for the box
 
-- `.hero-description-box` — max-width ~700px, rounded corners, translucent background + border using `color-mix` (matching existing site conventions), `backdrop-filter: blur`, subtle box-shadow, centered text
-- Light mode variant via `:root[data-theme="light"] .hero-description-box`
-- Mobile responsive sizing via `@media (max-width: 940px)`
+File: `src/components/override-components/Hero.astro` — inside `<style>` > `@layer starlight.core`
 
-### 3. `Hero.astro` — Adjust vertical padding
+```css
+.hero-description-box {
+  max-width: 700px;
+  margin-top: 2.5rem;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  border: 1.5px solid color-mix(in srgb, var(--sl-color-white) 15%, transparent);
+  background: color-mix(in srgb, var(--sl-color-black) 40%, transparent);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  font-size: 1.15rem;
+  line-height: 1.7;
+  text-align: center;
+  color: var(--sl-color-gray-2);
+}
+```
 
-Reduce top padding on the hero div to shift title/tagline up and make room for the box within the existing hero height:
+- [ ] Box has translucent background with blur
+- [ ] Border uses `color-mix` consistent with site conventions
+- [ ] Subtle shadow for depth
+
+### Step 3: Add mobile responsive styles
+
+File: same `<style>` block, inside the existing `@media (max-width: 940px)` rule
+
+```css
+.hero-description-box {
+  font-size: 1rem;
+  padding: 1.25rem 1.5rem;
+  max-width: 90%;
+}
+```
+
+- [ ] Smaller font and padding on mobile
+- [ ] Box takes up to 90% width on small screens
+
+### Step 4: Adjust hero vertical padding
+
+File: `src/components/override-components/Hero.astro` — the hero `<div>` (line 21)
+
+Reduce top padding to shift title/tagline up and make room for the box within the existing hero height:
 
 - Current: `pt-36 md:pt-44 lg:pt-56`
 - Target: approximately `pt-24 md:pt-32 lg:pt-40` (tune visually)
 
-### 4. No other files need changes
+- [ ] Padding reduced
+- [ ] Title/tagline/box all fit within the hero background height
 
-- `index.mdx` — unchanged
-- `PageFrame.astro` — unchanged
-- Background auto-sizing script — already handles dynamic hero height
+### Step 5: Visual verification
+
+- [ ] Box visible with translucent bg, readable text, subtle glow/shadow
+- [ ] Mobile: box scales down, text remains readable
+- [ ] NanoKnow title and tagline unchanged in appearance
+- [ ] Hero background image still covers the full hero section
+
+## Files touched
+
+Only `src/components/override-components/Hero.astro` — no other files need changes.
