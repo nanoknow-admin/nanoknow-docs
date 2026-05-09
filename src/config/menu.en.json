@@ -5,8 +5,8 @@
       "url": "/"
     },
     {
-      "name": "Vision",
-      "url": "/vision/"
+      "name": "About",
+      "url": "/about/"
     },
     {
       "name": "Members",
@@ -44,8 +44,8 @@
       "title": "About",
       "links": [
         {
-          "name": "The NanoKnow Vision",
-          "url": "/vision/"
+          "name": "About nanoKnow",
+          "url": "/about/"
         },
         {
           "name": "Contact Us",
