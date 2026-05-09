@@ -9,7 +9,7 @@
       "url": "/vision/"
     },
     {
-      "name": "Members",
+      "name": "Participating Facilities",
       "url": "/members/"
     },
     {
@@ -20,7 +20,7 @@
       "name": "Resources",
       "hasChildren": true,
       "children": [
-        { "name": "US Facilities", "url": "/us-facilities/" },
+        { "name": "U.S. Facility List", "url": "/us-facilities/" },
         { "name": "Community Forum", "url": "https://forum.nanoknow.org/" },
         { "name": "Nanobot Chat", "url": "https://nanobot.chat/" }
       ]
