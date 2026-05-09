@@ -82,7 +82,11 @@
     accent-color: #0067a3;
 }
 .leaflet-control-layers-overlays label:nth-child(2) input[type="checkbox"] {
-    accent-color: #72b026;
+    accent-color: #FFC500;
+}
+/* Override green marker pins to gold */
+.awesome-marker-icon-green {
+    filter: hue-rotate(-45deg) saturate(3) brightness(1.4) !important;
 }
 /* Shrink the Academic-layer inner dot without affecting other glyphs. */
 .awesome-marker i.fa-circle {
@@ -8417,7 +8421,7 @@
                 },
                 overlays :  {
                     "\u003cspan style=\"display:inline-block;width:10px;height:10px;border-radius:50%;background:#0067a3;margin-right:6px;vertical-align:middle;\"\u003e\u003c/span\u003eAcademic" : feature_group_b0ace4d059ee5671a2e3204f1bf63908,
-                    "\u003cspan style=\"display:inline-block;width:10px;height:10px;border-radius:50%;background:#72b026;margin-right:6px;vertical-align:middle;\"\u003e\u003c/span\u003eGovernment" : feature_group_efec016681f781a76d5f8c321a5a996d,
+                    "\u003cspan style=\"display:inline-block;width:10px;height:10px;border-radius:50%;background:#FFC500;margin-right:6px;vertical-align:middle;\"\u003e\u003c/span\u003eGovernment" : feature_group_efec016681f781a76d5f8c321a5a996d,
                 },
             };
             let layer_control_f878660033384b706fd80788dd85bfcb = L.control.layers(

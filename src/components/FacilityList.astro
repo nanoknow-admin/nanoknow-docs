@@ -35,24 +35,18 @@ for (const list of byState.values()) {
 }
 
 const totalCount = facilities.length;
-const uniCount = facilities.filter((f) => f.institution_type === "university").length;
-const govCount = facilities.filter((f) => f.institution_type === "government").length;
 ---
 
 <div class="facility-list-root">
-  <p class="subtitle" id="fl-subtitle">
+  <p class="subtitle">
     {totalCount} facilities across {sortedStates.length} states
   </p>
 
   <div class="toolbar">
-    <div class="filter-box">
-      <label><input type="radio" name="fl-filter" value="university" /> University ({uniCount})</label>
-      <label><input type="radio" name="fl-filter" value="government" /> Government ({govCount})</label>
-      <label><input type="radio" name="fl-filter" value="both" checked /> Both ({totalCount})</label>
+    <div class="toolbar-actions">
+      <button id="fl-expand-all">Expand All Sites</button>
+      <button id="fl-collapse-all">Collapse All Sites</button>
     </div>
-    <span class="sep"></span>
-    <button id="fl-expand-all">Expand All Sites</button>
-    <button id="fl-collapse-all">Collapse All Sites</button>
   </div>
 
   {sortedStates.map((state) => {
@@ -73,7 +67,7 @@ const govCount = facilities.filter((f) => f.institution_type === "government").l
         </summary>
         {list.map((f) => {
           const isGov = f.institution_type === "government";
-          const linkColor = isGov ? "#2e7d32" : "#1a73e8";
+          const linkColor = isGov ? "#FFC500" : "#60a5fa";
           return (
             <details class="fl-facility" data-type={f.institution_type}>
               <summary>
@@ -121,80 +115,59 @@ const govCount = facilities.filter((f) => f.institution_type === "government").l
     max-width: 800px;
     margin: 0 auto;
     line-height: 1.5;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   }
 
   .subtitle {
-    color: #6c757d;
+    color: #9ca3af;
     margin-bottom: 0.75rem;
     font-size: 0.9rem;
+    text-align: center;
   }
 
   .toolbar {
     display: flex;
     gap: 0.75rem;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
     align-items: center;
+    justify-content: center;
   }
   .toolbar button {
+    margin: 0;
     padding: 0.35rem 0.75rem;
     font-size: 0.8rem;
-    border: 1px solid #ced4da;
+    border: 1px solid #4b5563;
     border-radius: 4px;
-    background: #fff;
+    background: #1f2937;
     cursor: pointer;
-    color: #495057;
+    color: #d1d5db;
     user-select: none;
+    transition: background 0.15s;
   }
   .toolbar button:hover {
-    background: #e9ecef;
+    background: #374151;
   }
 
-  .filter-box {
-    display: inline-flex;
-    gap: 0.9rem;
+  .toolbar-actions {
+    display: flex;
+    gap: 0.75rem;
     align-items: center;
-    border: 2px solid #3b5998;
-    border-radius: 6px;
-    padding: 0.4rem 0.9rem;
-    background: #fff;
-  }
-  .filter-box label {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-size: 0.85rem;
-    color: #212529;
-    cursor: pointer;
-    user-select: none;
-  }
-  .filter-box input[type="radio"] {
-    accent-color: #3b5998;
-  }
-
-  .sep {
-    border-left: 1px solid #dee2e6;
-    height: 1.4rem;
-    margin: 0 0.15rem;
   }
 
   /* State-level accordion */
   .fl-state {
     margin-bottom: 0.5rem;
-    border: 1px solid #3b599833;
+    border: 1px solid #3b599855;
     border-radius: 6px;
-    background: #fff;
+    background: #111827;
     overflow: hidden;
-  }
-  .fl-state.hidden {
-    display: none;
   }
   .fl-state > summary {
     padding: 0.65rem 1rem;
     font-weight: 700;
     font-size: 0.95rem;
-    background: #3b5998;
-    color: #f5c542;
+    background: #1e3a6e;
+    color: #e5e7eb;
     cursor: pointer;
     list-style: none;
   }
@@ -215,11 +188,8 @@ const govCount = facilities.filter((f) => f.institution_type === "government").l
 
   /* Facility-level accordion */
   .fl-facility {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #1f2937;
     padding: 0;
-  }
-  .fl-facility.hidden {
-    display: none;
   }
   .fl-facility:last-child {
     border-bottom: none;
@@ -229,23 +199,24 @@ const govCount = facilities.filter((f) => f.institution_type === "government").l
     cursor: pointer;
     font-size: 0.88rem;
     list-style: none;
+    color: #e5e7eb;
   }
   .fl-facility > summary::-webkit-details-marker {
     display: none;
   }
   .fl-facility > summary::before {
     content: "\25B8\FE0E ";
-    color: #6c757d;
+    color: #6b7280;
   }
   .fl-facility[open] > summary::before {
     content: "\25BE\FE0E ";
   }
   .fl-facility > summary:hover {
-    background: #f1f3f5;
+    background: #1f2937;
   }
 
   .city {
-    color: #6c757d;
+    color: #9ca3af;
     font-weight: 400;
     font-size: 0.82rem;
   }
@@ -260,14 +231,15 @@ const govCount = facilities.filter((f) => f.institution_type === "government").l
     margin-left: 0.3rem;
   }
   .badge-gov {
-    background: #2e7d32;
-    color: #fff;
+    background: #FFC500;
+    color: #1a1a1a;
   }
 
   .main-site,
   .additional-links {
     padding: 0.3rem 1rem 0.3rem 2.5rem;
     font-size: 0.82rem;
+    color: #d1d5db;
   }
   .main-site {
     padding-top: 0.5rem;
@@ -276,7 +248,7 @@ const govCount = facilities.filter((f) => f.institution_type === "government").l
     padding-bottom: 0.5rem;
   }
   .link-label {
-    color: #6c757d;
+    color: #9ca3af;
     font-weight: 600;
     font-size: 0.78rem;
     text-transform: uppercase;
@@ -292,20 +264,21 @@ const govCount = facilities.filter((f) => f.institution_type === "government").l
   }
   .no-links {
     padding: 0.25rem 1rem 0.5rem 2.5rem;
-    color: #adb5bd;
+    color: #6b7280;
     font-size: 0.82rem;
   }
 
   .facility-list-root a {
-    color: #1a73e8;
+    color: #60a5fa;
     text-decoration: none;
     word-break: break-all;
   }
   .facility-list-root a:hover {
     text-decoration: underline;
+    color: #93c5fd;
   }
   .facility-list-root a:visited {
-    color: #4a148c;
+    color: #a78bfa;
   }
 </style>
 
@@ -314,46 +287,12 @@ const govCount = facilities.filter((f) => f.institution_type === "government").l
     const root = document.querySelector(".facility-list-root");
     if (!root) return;
 
-    const radios = root.querySelectorAll<HTMLInputElement>('input[name="fl-filter"]');
     const expandBtn = root.querySelector("#fl-expand-all");
     const collapseBtn = root.querySelector("#fl-collapse-all");
-    const subtitle = root.querySelector("#fl-subtitle");
-
-    function applyFilters() {
-      const checked = root!.querySelector<HTMLInputElement>(
-        'input[name="fl-filter"]:checked',
-      );
-      const val = checked?.value ?? "both";
-      const showUni = val === "university" || val === "both";
-      const showGov = val === "government" || val === "both";
-      let shown = 0;
-
-      root!.querySelectorAll<HTMLDetailsElement>(".fl-state").forEach((state) => {
-        let visibleInState = 0;
-        state.querySelectorAll<HTMLDetailsElement>(".fl-facility").forEach((fac) => {
-          const t = (fac as HTMLElement).dataset.type;
-          const match =
-            (t === "university" && showUni) || (t === "government" && showGov);
-          fac.classList.toggle("hidden", !match);
-          if (match) visibleInState++;
-        });
-        state.classList.toggle("hidden", visibleInState === 0);
-        const countEl = state.querySelector(".state-count");
-        if (countEl) countEl.textContent = `(${visibleInState})`;
-        shown += visibleInState;
-      });
-
-      const statesShown = root!.querySelectorAll(".fl-state:not(.hidden)").length;
-      if (subtitle) {
-        subtitle.textContent = `${shown} facilities across ${statesShown} states`;
-      }
-    }
-
-    radios.forEach((r) => r.addEventListener("change", applyFilters));
 
     expandBtn?.addEventListener("click", () => {
       root!
-        .querySelectorAll<HTMLDetailsElement>(".fl-facility:not(.hidden)")
+        .querySelectorAll<HTMLDetailsElement>(".fl-facility")
         .forEach((d) => (d.open = true));
     });
 
