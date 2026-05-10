@@ -5,7 +5,6 @@ template: splash
 ---
 
 import Section from "~/components/Section.astro";
-import AirtableEmbed from "~/components/AirtableEmbed.astro";
 
 <Section title='<span style="color: #1354A2;">Sign Up for</span> <span style="color: #FFC500;">NanoKnow</span><sup style="font-size: 0.5em; margin-left: 0.1em; color: #FFC500;">™</sup>' titleClass="text-7xl">
 
@@ -19,8 +18,8 @@ We'll use this information to share NanoKnow updates, community opportunities, a
 
 </div>
 
-<div class="signup-form-container" style="margin: 2rem auto; max-width: 800px;">
-  <AirtableEmbed src="https://airtable.com/embed/appc8JGxt5AUaVVj3/pagYCkatWF7Bl4816/form" buttonText="Open Sign-Up Form" />
+<div style="text-align: center; margin: 2rem auto;">
+  <a href="https://airtable.com/embed/appc8JGxt5AUaVVj3/pagYCkatWF7Bl4816/form" target="_blank" rel="noopener" style="display: inline-block; background: #1354A2; color: #fff; padding: 0.75rem 2rem; border-radius: 0.5rem; font-weight: 600; text-decoration: none; font-size: 1.1rem;">Open Sign-Up Form</a>
 </div>
 
 </Section>

@@ -31,12 +31,16 @@
       "title": "Join Our Community",
       "links": [
         {
+          "name": "Sign Up",
+          "url": "/sign-up/"
+        },
+        {
           "name": "Discourse Community",
           "url": "https://forum.nanoknow.org/"
         },
         {
-          "name": "Get Involved",
-          "url": "/get-involved/"
+          "name": "Contact Us",
+          "url": "/contact/"
         }
       ]
     },
@@ -44,12 +48,12 @@
       "title": "About",
       "links": [
         {
-          "name": "About nanoKnow",
+          "name": "NanoKnow Vision",
           "url": "/vision/"
         },
         {
-          "name": "Contact Us",
-          "url": "/contact/"
+          "name": "Participating Facilities",
+          "url": "/members/"
         }
       ]
     },
