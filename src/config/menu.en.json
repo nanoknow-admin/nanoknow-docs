@@ -1,7 +1,7 @@
 {
   "main": [
     {
-      "name": "Home",
+      "name": "About",
       "url": "/"
     },
     {
@@ -9,8 +9,21 @@
       "url": "/vision/"
     },
     {
-      "name": "Get Involved",
-      "url": "/get-involved/"
+      "name": "Participating Facilities",
+      "url": "/members/"
+    },
+    {
+      "name": "Sign Up",
+      "url": "/sign-up/"
+    },
+    {
+      "name": "Resources",
+      "hasChildren": true,
+      "children": [
+        { "name": "U.S. Facility List", "url": "/us-facilities/" },
+        { "name": "Community Forum", "url": "https://forum.nanoknow.org/" },
+        { "name": "Nanobot Chat", "url": "https://nanobot.chat/" }
+      ]
     }
   ],
   "footer": {
@@ -18,12 +31,16 @@
       "title": "Join Our Community",
       "links": [
         {
+          "name": "Sign Up",
+          "url": "/sign-up/"
+        },
+        {
           "name": "Discourse Community",
           "url": "https://forum.nanoknow.org/"
         },
         {
-          "name": "Get Involved",
-          "url": "/get-involved/"
+          "name": "Contact Us",
+          "url": "/contact/"
         }
       ]
     },
@@ -31,12 +48,12 @@
       "title": "About",
       "links": [
         {
-          "name": "The NanoKnow Vision",
+          "name": "NanoKnow Vision",
           "url": "/vision/"
         },
         {
-          "name": "Contact Us",
-          "url": "/contact/"
+          "name": "Participating Facilities",
+          "url": "/members/"
         }
       ]
     },
@@ -50,6 +67,23 @@
         {
           "name": "Blog",
           "url": "/blog/"
+        }
+      ]
+    },
+    "terms": {
+      "title": "Terms",
+      "links": [
+        {
+          "name": "Privacy Policy",
+          "url": "/legal/privacy-policy/"
+        },
+        {
+          "name": "Privacy Choices",
+          "url": "/legal/privacy-choices/"
+        },
+        {
+          "name": "Terms of Service",
+          "url": "/legal/terms-of-service/"
         }
       ]
     }

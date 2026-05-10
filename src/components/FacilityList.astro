@@ -1,0 +1,363 @@
+---
+import facilitiesRaw from "../../data/facilities_verified_geocoded.json";
+
+interface Facility {
+  id: string;
+  institution: string;
+  facility_name_current: string;
+  city: string;
+  state: string;
+  url: string;
+  related_urls: string[];
+  status: string;
+  institution_type: string;
+  lab_type: string;
+  notes: string;
+  duplicate_of: string | null;
+}
+
+const facilities = (facilitiesRaw as Facility[]).filter(
+  (f) => f.status === "verified" && !f.duplicate_of,
+);
+
+// Group by state, sorted alphabetically
+const byState = new Map<string, Facility[]>();
+for (const f of facilities) {
+  const list = byState.get(f.state) ?? [];
+  list.push(f);
+  byState.set(f.state, list);
+}
+const sortedStates = [...byState.keys()].sort();
+
+// Sort facilities within each state by institution name
+for (const list of byState.values()) {
+  list.sort((a, b) => a.institution.localeCompare(b.institution));
+}
+
+const totalCount = facilities.length;
+---
+
+<div class="facility-list-root">
+  <p class="subtitle">
+    {totalCount} facilities across {sortedStates.length} states
+  </p>
+
+  <div class="toolbar">
+    <div class="filter-group">
+      <button class="filter-btn active" data-filter="both">All</button>
+      <button class="filter-btn" data-filter="university">Academic</button>
+      <button class="filter-btn" data-filter="government">Government</button>
+    </div>
+  </div>
+
+  {sortedStates.map((state) => {
+    const list = byState.get(state)!;
+    const uniInState = list.filter((f) => f.institution_type === "university").length;
+    const govInState = list.filter((f) => f.institution_type === "government").length;
+    const stateSlug = state.toLowerCase().replace(/\s+/g, "-");
+    return (
+      <details
+        class="fl-state"
+        id={`fl-state-${stateSlug}`}
+        open
+        data-uni={uniInState}
+        data-gov={govInState}
+      >
+        <summary>
+          {state} <span class="state-count">({list.length})</span>
+        </summary>
+        {list.map((f) => {
+          const isGov = f.institution_type === "government";
+          const linkColor = isGov ? "#FFC500" : "#60a5fa";
+          return (
+            <details class="fl-facility" data-type={f.institution_type}>
+              <summary>
+                <span style={`color:${linkColor}`}>
+                  <strong>{f.institution}</strong> &mdash; {f.facility_name_current}
+                </span>
+                {isGov && <span class="badge badge-gov">Gov</span>}
+                <span class="city">({f.city})</span>
+              </summary>
+              {f.url && (
+                <div class="main-site">
+                  <span class="link-label">Main site:</span>{" "}
+                  <a href={f.url} target="_blank" rel="noopener">
+                    {f.url}
+                  </a>
+                </div>
+              )}
+              {f.related_urls.length > 0 && (
+                <div class="additional-links">
+                  <span class="link-label">Additional links:</span>
+                  <ul>
+                    {f.related_urls.map((u) => (
+                      <li>
+                        <a href={u} target="_blank" rel="noopener">
+                          {u}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {!f.url && f.related_urls.length === 0 && (
+                <div class="no-links">No links available</div>
+              )}
+            </details>
+          );
+        })}
+      </details>
+    );
+  })}
+</div>
+
+<style>
+  .facility-list-root {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.5;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+
+  .subtitle {
+    color: #9ca3af;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .toolbar {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    align-items: center;
+    justify-content: center;
+  }
+  .toolbar button {
+    margin: 0;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+    border: 1px solid #4b5563;
+    border-radius: 4px;
+    background: #1f2937;
+    cursor: pointer;
+    color: #d1d5db;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .toolbar button:hover {
+    background: #374151;
+  }
+
+  .toolbar-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .filter-group {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    border: 1px solid #4b5563;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .filter-btn {
+    margin: 0;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+    border: none;
+    background: #1f2937;
+    cursor: pointer;
+    color: #9ca3af;
+    user-select: none;
+    transition: background 0.15s, color 0.15s;
+  }
+  .filter-btn:not(:last-child) {
+    border-right: 1px solid #4b5563;
+  }
+  .filter-btn:hover {
+    background: #374151;
+    color: #d1d5db;
+  }
+  .filter-btn.active {
+    background: #1354A2;
+    color: #fff;
+  }
+
+  .fl-facility.fl-hidden {
+    display: none;
+  }
+  .fl-state.fl-hidden {
+    display: none;
+  }
+
+  /* State-level accordion */
+  .fl-state {
+    margin-bottom: 0.5rem;
+    border: 1px solid #3b599855;
+    border-radius: 6px;
+    background: #111827;
+    overflow: hidden;
+  }
+  .fl-state > summary {
+    padding: 0.65rem 1rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    background: #1e3a6e;
+    color: #e5e7eb;
+    cursor: pointer;
+    list-style: none;
+  }
+  .fl-state > summary::-webkit-details-marker {
+    display: none;
+  }
+  .fl-state > summary::before {
+    content: "\25B6\FE0E  ";
+    font-size: 0.75rem;
+  }
+  .fl-state[open] > summary::before {
+    content: "\25BC\FE0E  ";
+  }
+  .state-count {
+    font-weight: 400;
+    opacity: 0.8;
+  }
+
+  /* Facility-level accordion */
+  .fl-facility {
+    border-bottom: 1px solid #1f2937;
+    padding: 0;
+  }
+  .fl-facility:last-child {
+    border-bottom: none;
+  }
+  .fl-facility > summary {
+    padding: 0.5rem 1rem 0.5rem 1.5rem;
+    cursor: pointer;
+    font-size: 0.88rem;
+    list-style: none;
+    color: #e5e7eb;
+  }
+  .fl-facility > summary::-webkit-details-marker {
+    display: none;
+  }
+  .fl-facility > summary::before {
+    content: "\25B8\FE0E ";
+    color: #6b7280;
+  }
+  .fl-facility[open] > summary::before {
+    content: "\25BE\FE0E ";
+  }
+  .fl-facility > summary:hover {
+    background: #1f2937;
+  }
+
+  .city {
+    color: #9ca3af;
+    font-weight: 400;
+    font-size: 0.82rem;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    vertical-align: middle;
+    font-weight: 600;
+    margin-left: 0.3rem;
+  }
+  .badge-gov {
+    background: #FFC500;
+    color: #1a1a1a;
+  }
+
+  .main-site,
+  .additional-links {
+    padding: 0.3rem 1rem 0.3rem 2.5rem;
+    font-size: 0.82rem;
+    color: #d1d5db;
+  }
+  .main-site {
+    padding-top: 0.5rem;
+  }
+  .additional-links {
+    padding-bottom: 0.5rem;
+  }
+  .link-label {
+    color: #9ca3af;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .additional-links ul {
+    list-style: none;
+    padding: 0.15rem 0 0 0;
+    margin: 0;
+  }
+  .additional-links li {
+    padding: 0.1rem 0;
+  }
+  .no-links {
+    padding: 0.25rem 1rem 0.5rem 2.5rem;
+    color: #6b7280;
+    font-size: 0.82rem;
+  }
+
+  .facility-list-root a {
+    color: #60a5fa;
+    text-decoration: none;
+    word-break: break-all;
+  }
+  .facility-list-root a:hover {
+    text-decoration: underline;
+    color: #93c5fd;
+  }
+  .facility-list-root a:visited {
+    color: #a78bfa;
+  }
+</style>
+
+<script>
+  function initFacilityList() {
+    const root = document.querySelector(".facility-list-root");
+    if (!root) return;
+
+    const filterBtns = root.querySelectorAll<HTMLButtonElement>(".filter-btn");
+    filterBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filterBtns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        applyFilter(btn.dataset.filter || "both");
+      });
+    });
+
+    function applyFilter(filter: string) {
+      const facilities = root!.querySelectorAll<HTMLElement>(".fl-facility");
+      facilities.forEach((f) => {
+        const type = f.dataset.type;
+        if (filter === "both" || type === filter) {
+          f.classList.remove("fl-hidden");
+        } else {
+          f.classList.add("fl-hidden");
+        }
+      });
+
+      const states = root!.querySelectorAll<HTMLElement>(".fl-state");
+      states.forEach((s) => {
+        const visible = s.querySelectorAll(".fl-facility:not(.fl-hidden)").length;
+        if (visible === 0) {
+          s.classList.add("fl-hidden");
+        } else {
+          s.classList.remove("fl-hidden");
+        }
+      });
+    }
+  }
+
+  document.addEventListener("astro:page-load", initFacilityList);
+  initFacilityList();
+</script>

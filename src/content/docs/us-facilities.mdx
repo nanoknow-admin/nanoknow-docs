@@ -1,0 +1,52 @@
+---
+title: ""
+description: U.S. Nanofabrication Facilities directory
+template: splash
+---
+
+import Section from "~/components/Section.astro";
+import FacilityList from "~/components/FacilityList.astro";
+
+<Section title='<span style="color: #1354A2;">U.S. Nanofabrication</span> <span style="color: #FFC500;">Facilities</span>' description='<span style="color: #fff;">Explore facilities by geography and find relevant site links</span>' titleClass="text-7xl">
+
+<div class="map-container" style="margin: 2rem auto; max-width: 1200px;">
+  <iframe
+    src="/nanofab_map.html"
+    width="100%"
+    style="border: 1px solid #333; border-radius: 8px; height: 600px;"
+    title="Nanofabrication facilities map"
+  ></iframe>
+  <p style="text-align: center; color: #6c757d; font-size: 0.85rem; margin-top: 0.5rem;">
+    Click markers to view details · Use two fingers to pan on touch devices
+  </p>
+  <p style="text-align: center; margin-top: 0.25rem;">
+    <a href="/nanofab_map.html" target="_blank" rel="noopener" style="color: #1354A2; font-size: 0.9rem; text-decoration: underline;">View fullscreen map ↗</a>
+  </p>
+</div>
+
+<style>{`
+  .map-container iframe {
+    height: 350px;
+  }
+  @media (min-width: 640px) {
+    .map-container iframe {
+      height: 450px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .map-container iframe {
+      height: 600px;
+    }
+  }
+`}</style>
+
+<div style="margin: 3rem auto 1rem; max-width: 800px; text-align: center;">
+  <h2 style="font-size: 2.2rem; margin-bottom: 0.25rem;">
+    <span style="color: #1354A2;">U.S. Facility Directory</span> <span style="color: #FFC500;">by State</span>
+  </h2>
+  <p style="color: #fff; font-size: 1rem;">University and government nanofabrication facilities with links</p>
+</div>
+
+<FacilityList />
+
+</Section>

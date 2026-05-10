@@ -1,27 +1,22 @@
 ---
 import config from "@/config/config.json";
-import social from "@/config/social.json";
-import { Icon } from "@astrojs/starlight/components";
 import { markdownify } from "@/lib/utils/textConverter";
 import { getTranslations } from "@/lib/utils/languagePerser";
 
 const locale = Astro.currentLocale;
-
-const menu = await getTranslations(locale || "en") 
-
+const menu = await getTranslations(locale || "en");
 const footer = menu.footer;
 ---
 
-<footer>
-  <div class="footer-divider"></div>
-  <div class="container">
-    <div class="top-footer">
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-columns">
       {
         footer.community && (
           <div>
-            <h4>{footer.community.title}</h4>
-            <ul>
-              {footer.community?.links.map((link: any) => (
+            <p class="footer-heading">{footer.community.title}</p>
+            <ul class="footer-links">
+              {footer.community.links.map((link: any) => (
                 <li>
                   <a href={link.url}>{link.name}</a>
                 </li>
@@ -33,9 +28,9 @@ const footer = menu.footer;
       {
         footer.help_links && (
           <div>
-            <h4>{footer.help_links.title}</h4>
-            <ul>
-              {footer.help_links?.links.map((link: any) => (
+            <p class="footer-heading">{footer.help_links.title}</p>
+            <ul class="footer-links">
+              {footer.help_links.links.map((link: any) => (
                 <li>
                   <a href={link.url}>{link.name}</a>
                 </li>
@@ -47,9 +42,9 @@ const footer = menu.footer;
       {
         footer.resources && (
           <div>
-            <h4>{footer.resources.title}</h4>
-            <ul>
-              {footer.resources?.links.map((link: any) => (
+            <p class="footer-heading">{footer.resources.title}</p>
+            <ul class="footer-links">
+              {footer.resources.links.map((link: any) => (
                 <li>
                   <a href={link.url}>{link.name}</a>
                 </li>
@@ -58,50 +53,14 @@ const footer = menu.footer;
           </div>
         )
       }
-
       {
-        config?.params?.footer_contact?.enable && (
+        footer.terms && (
           <div>
-            <h4>Connect With Us</h4>
-            <form
-              action={config?.params?.footer_contact?.action}
-              class="mail-form"
-            >
-              <input type="email" placeholder="Enter your email" required />
-              <button type="submit" aria-label="Submit email">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M21.0477 3.05293C18.8697 0.707361 2.48648 6.4532 2.50001 8.551C2.51535 10.9299 8.89809 11.6617 10.6672 12.1581C11.7311 12.4565 12.016 12.7625 12.2613 13.8781C13.3723 18.9305 13.9301 21.4435 15.2014 21.4996C17.2278 21.5892 23.1733 5.342 21.0477 3.05293Z"
-                    class="stroke-black dark:stroke-white"
-                    stroke-width="1.5"
-                  />
-                  <path
-                    d="M11.5 12.5L15 9"
-                    class="stroke-black dark:stroke-white"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </button>
-            </form>
-
-            <ul class="social-icons">
-              {social.main.map((item) => (
+            <p class="footer-heading">{footer.terms.title}</p>
+            <ul class="footer-links">
+              {footer.terms.links.map((link: any) => (
                 <li>
-                  <a href={item.href} aria-label={item.label}>
-                    <Icon
-                      name={item?.icon as any}
-                      color="var(--sl-color-white)"
-                      size="20px"
-                    />
-                  </a>
+                  <a href={link.url}>{link.name}</a>
                 </li>
               ))}
             </ul>
@@ -109,110 +68,95 @@ const footer = menu.footer;
         )
       }
     </div>
-    <div class="bottom-footer">
-      <p set:html={markdownify(config?.params?.copyright)}/>
+    <div class="footer-bottom">
+      <p set:html={markdownify(config?.params?.copyright)} />
     </div>
   </div>
 </footer>
 
 <style>
   @layer starlight.core {
-    .footer-divider {
-      width: 100%;
-      margin: 0 0 1rem;
-      border-top: 1px solid var(--sl-color-gray-6);
-    }
-    :root[data-theme="light"] .footer-divider {
-      border-top: 1px solid var(--sl-color-gray-5);
-    }
-    .top-footer {
-      border-bottom: 1px solid var(--sl-color-gray-6);
-      padding: 40px 0 30px;
-      display: grid;
-      gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-    .top-footer h4 {
-      font-size: 1rem !important;
-      margin-bottom: 2rem;
-    }
-    .top-footer ul {
-      list-style: none;
-      padding: 0;
-    }
-    .top-footer ul li {
-      margin-bottom: 1.2rem;
-    }
-    .top-footer ul li a {
-      color: var(--sl-color-text);
-      text-decoration: none;
-      font-size: 1rem;
-      transition: color 0.3s ease;
-    }
-    .top-footer ul li a:hover {
-      color: var(--color-primary);
-    }
-    .mail-form {
-      border: 1px solid var(--sl-color-gray-6);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-radius: 12px;
-      padding: 0.5rem 0.8rem;
-      background-color: var(--sl-color-black);
-    }
-    .mail-form input {
-      background-color: transparent;
-      width: 90%;
-    }
-    .mail-form input:focus {
-      outline: none;
-    }
-    .mail-form button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: transparent;
-      cursor: pointer;
-    }
-    .social-icons {
-      display: flex;
-      gap: 1rem;
-      margin-top: 2rem;
-      flex-wrap: wrap;
-    }
-    .social-icons li a {
-      background: color-mix(in srgb, var(--sl-color-gray-4) 20%, transparent);
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.6s ease;
-    }
-    .social-icons li a:hover {
-      background: var(--color-primary-gradient);
-      color: white !important;
+    .site-footer {
+      margin-top: auto;
+      padding: 0 var(--sl-content-pad-x, 1rem);
     }
 
-    .bottom-footer {
-      padding: 20px 0;
-      border-top: 2px solid var(--sl-color-hairline);
+    .footer-inner {
+      max-width: 72rem;
+      margin: 0 auto;
+    }
+
+    .footer-columns {
+      border-top: 1px solid var(--sl-color-gray-6);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 2.5rem 0 2rem;
+    }
+
+    @media (min-width: 640px) {
+      .footer-columns {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .footer-columns {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .footer-heading {
+      font-size: 1.0625rem;
+      font-weight: 500;
+      color: var(--sl-color-white);
+      margin: 0 0 0.75rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
+      flex-direction: column;
+      gap: 0.5rem;
     }
-    .bottom-footer a {
-      color: var(--sl-color-text) ;
+
+    .footer-links a {
+      color: var(--sl-color-gray-3);
       text-decoration: none;
-      transition: color 0.3s ease;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
     }
-   
-    .bottom-footer a:hover {
-      color: var(--color-primary);
+
+    .footer-links a:hover {
+      color: var(--sl-color-accent);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--sl-color-gray-6);
+      padding: 1.25rem 0;
+      text-align: center;
+      font-size: 0.9375rem;
+      color: var(--sl-color-gray-3);
+    }
+
+    :root[data-theme="light"] .footer-columns {
+      border-top-color: var(--sl-color-gray-5);
+    }
+
+    :root[data-theme="light"] .footer-bottom {
+      border-top-color: var(--sl-color-gray-5);
+    }
+
+    .footer-bottom a {
+      color: var(--sl-color-gray-3);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-bottom a:hover {
+      color: var(--sl-color-accent);
     }
   }
 </style>

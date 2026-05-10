@@ -1,5 +1,5 @@
 ---
-title: "" #keep empty string else will have splash title in the upper left of the page
+title: ""
 description: Learn about NanoKnow and our mission to share nanofabrication knowledge
 template: splash
 ---
@@ -11,45 +11,85 @@ import Grid from "~/components/user-components/Grid.astro";
 
 <div id="vision"></div>
 
-<Section title='<span style="color: #1354A2;">The Vision of</span> <span style="color: #FFC500;">NanoKnow</span>' description="Democratizing nanofabrication knowledge for everyone" titleClass="text-7xl">
+<Section title='<span style="display: block;"><span style="color: #FFC500;">NanoKnow</span><sup style="font-size: 0.5em; margin-left: 0.1em; color: #FFC500;">™</sup><span style="color: #1354A2;"> Vision</span></span><span style="display: block; font-size: 2rem; line-height: 1.35; letter-spacing: 0; margin-top: 1rem; color: #ffffff; font-weight: 400;">A connected national ecosystem for nanofabrication knowledge</span>'>
 
-<div style="margin-top: 4rem;"></div>
-
-<div class="prose dark:prose-invert max-w-4xl mx-auto mb-16 text-lg text-center">
-
-We envision a world where nanofabrication knowledge is accessible to all — where students learn from decades of collective experience, researchers quickly find answers to complex technical questions, and the entire community advances through shared expertise.
-
+<div class="prose dark:prose-invert max-w-4xl mx-auto mb-16 mt-10 text-lg text-left">
+  <p>
+    Across the United States, academic and government nanofabrication facilities support research, training, prototyping, and technology development. Each facility develops valuable local expertise, but that knowledge is often difficult to find beyond the people, documents, and systems where it was first created.
+  </p>
+  <p>
+    NanoKnow envisions a connected national ecosystem where fabrication knowledge can move more easily across institutions — helping labs learn from one another, reduce duplicated effort, train the next generation, and accelerate the path from research discovery to real-world technology.
+  </p>
+  <p>
+    The map below illustrates the scale of this opportunity.
+  </p>
 </div>
 
-
-<div style="margin: 3rem auto; max-width: 1200px;">
+<div class="vision-map-container" style="margin: 3rem auto; max-width: 1000px;">
   <iframe 
-    src="/nanofabs_map.html" 
+    src="/nanofab_map.html" 
     width="100%" 
-    height="600" 
-    style="border: 1px solid #333; border-radius: 8px; height: 600px !important; min-height: 600px !important;"
-    title="Nanofabrication Facilities Map"
+    style="border: 1px solid #333; border-radius: 8px; height: 600px;"
+    title="Nanofabrication facilities map"
   ></iframe>
+  <p style="text-align: center; margin-top: 0.75rem; font-size: 0.75rem; color: #888; line-height: 1.6; font-style: italic;">
+    <span style="color: #FFC500; font-style: normal; font-weight: 600;">Figure 1.</span> Map of 172 academic and government nanofabrication facilities in the United States. These sites illustrate the national nanofabrication ecosystem NanoKnow is designed to serve and are not implied to be NanoKnow partner institutions.
+  </p>
 </div>
 
-<div class="prose dark:prose-invert max-w-4xl mx-auto mb-16 text-lg text-center">
+<style>{`
+  .vision-map-container iframe {
+    height: 350px;
+  }
+  @media (min-width: 640px) {
+    .vision-map-container iframe {
+      height: 450px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .vision-map-container iframe {
+      height: 600px;
+    }
+  }
+`}</style>
 
-In the United States alone, more than 165 shared nanofabrication facilities — spanning universities, national labs, and government research centers — support thousands of researchers every year. Around the world, hundreds more laboratories contribute to this collective expertise. Connecting these communities through shared knowledge will transform how discoveries are made, accelerating innovation across physics, chemistry, biology, mediocine, engineering, and beyond.
+</Section>
 
+<Section title='<span style="color: #1354A2;">A Shared</span> <span style="color: #FFC500;">Challenge</span>'>
+
+<div class="prose dark:prose-invert max-w-4xl mx-auto mb-16 mt-10 text-lg text-left">
+  <p>
+    The map shows a broad national ecosystem of facilities with different tools, missions, users, and institutional contexts. Yet many of these labs face similar challenges: documenting processes, training users, troubleshooting tools, preserving staff expertise, and helping researchers find reliable fabrication knowledge.
+  </p>
+  <p>
+    When this knowledge remains isolated, facilities spend time and resources solving similar problems independently. NanoKnow's vision is to create a common knowledge layer that helps local expertise become more discoverable, reusable, and useful across the broader community.
+  </p>
+  <p>
+    This shared layer preserves context, attribution, and source information while making practical knowledge easier to find and build upon.
+  </p>
 </div>
 
+</Section>
+
+<Section title='<span style="color: #1354A2;">The Opportunity</span> <span style="color: #FFC500;">Ahead</span>'>
+
+<div class="prose dark:prose-invert max-w-4xl mx-auto mb-16 mt-10 text-lg text-left">
+  <p>
+    The future of U.S. semiconductor, quantum, and nanotechnology innovation depends not only on advanced tools, but on the ability to share expertise, train skilled people, and move knowledge across institutions. NanoKnow helps build that connective layer — turning distributed facility knowledge into a resource that can accelerate research, strengthen the workforce, and support technology translation.
+  </p>
+</div>
 
 <Grid columns={3}>
-  <Card title="Shared Lab Network" icon="rocket" iconColor="#FFC500">
-    Link nanofabrication labs to foster collaboration and shared learning between academic, government, and industry researchers
+  <Card title="Build National Connectivity" icon="rocket" iconColor="#FFC500">
+    Connect fabrication knowledge across facilities while preserving source, context, and institutional expertise.
   </Card>
   
-  <Card title="Living Knowledge Base" icon="open-book" iconColor="#1354A2">
-    Create a living knowledge base that evolves with the field, incorporating new techniques and technologies.
+  <Card title="Accelerate Shared Progress" icon="open-book" iconColor="#1354A2">
+    Help facilities save time and resources by building on existing expertise instead of solving common problems in isolation.
   </Card>
   
-  <Card title="AI-Enhanced Access" icon="rocket" iconColor="#FFC500">
-    Leverage AI to surface relevant documentation, training materials, and troubleshooting insights — turning decades of distributed expertise into an accessible, intelligent resource for researchers.
+  <Card title="Support Workforce Development" icon="rocket" iconColor="#FFC500">
+    Expand access to practical nanofabrication knowledge for students, staff, researchers, and emerging technology leaders.
   </Card>
 </Grid>
 

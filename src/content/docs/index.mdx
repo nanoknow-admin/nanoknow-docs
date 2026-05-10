@@ -1,43 +1,109 @@
 ---
-title: Home
+title: About
 description: Where nanofab knowledge lives.
 template: splash
 hero:
   title: |
-    <span style="text-decoration: underline; text-decoration-color: #FFC500;"><span style="color: #1354A2;">Nano</span> <span data-icon-path='Bulb_icon.png'></span> <span style="color: #FFC500;">Know</span></span>
+    <span data-icon-path='Bulb_icon.png'></span> <span style="text-decoration: underline; text-decoration-color: #FFC500;"><span style="color: #1354A2;">Nano</span><span style="color: #FFC500;">Know</span></span><sup style="font-size: 0.4em; color: #FFC500; margin-left: 0.15em; text-decoration: none; display: inline-block;">™</sup>
   tagline: Where nanofab knowledge lives.
 ---
 
 import Section from "~/components/Section.astro";
 import Card from "~/components/user-components/NewCard.astro";
 import Grid from "~/components/user-components/Grid.astro";
+import LogoCard from "~/components/user-components/LogoCard.astro";
+import stanfordLogo from "~/assets/nanofab_logos/stanford_at_nano_transparent.png";
+import pmiLogo from "~/assets/nanofab_logos/PMI-color-transbkgd.png";
+import cornellLogo from "~/assets/nanofab_logos/cornell_cnf_transparent.png";
+import asrcLogo from "~/assets/nanofab_logos/ASRC_nanofab_logo_transparent.png";
 
-<div id="about"></div>
+<div id="about" style="padding-top: 6rem;"></div>
 
-<Section title='<span style="color: #1354A2;">About</span> <span style="color: #FFC500;">NanoKnow</span>' description="Building a knowledge hub for the nanofabrication community" titleClass="text-7xl">
+<Section title='<span style="color: #1354A2;">About</span> <span style="color: #FFC500;">NanoKnow<sup style="font-size: 0.5em; margin-left: 0.1em;">™</sup></span>' description='<span style="font-size: 2rem; font-weight: 400; letter-spacing: 0;">An open AI and data-sharing platform for nanofabrication knowledge.</span>'>
 
-<div style="margin-top: 4rem;"></div>
+<div class="prose dark:prose-invert max-w-4xl mx-auto mb-16 text-lg text-left">
 
-<div class="prose dark:prose-invert max-w-4xl mx-auto mb-16 text-lg text-center">
+NanoKnow helps labs, researchers, students, and facility staff organize, discover, and reuse the knowledge and data needed to train users, operate tools, develop processes, troubleshoot problems, and support complex research.
 
-NanoKnow was created to address the growing need for accessible, comprehensive knowledge sharing in the nanofabrication community. We believe that by bringing together expertise, documentation, and best practices in one place, we can accelerate learning and innovation in the field — helping accelerate discoveries in physics, photonics, biology, medicine, chemistry, engineering and beyond.
+Today, much of this knowledge is scattered across documents, websites, internal folders, staff experience, and informal conversations. NanoKnow brings it together in a structured, searchable, and AI-accessible form so that expertise can be preserved, shared, and reused across the broader nanofabrication community.
+
+By connecting documentation, process data, training materials, troubleshooting insights, and community expertise, NanoKnow helps reduce duplicated effort, accelerate research, improve training, and support the path from academic discovery to real-world technology development.
 
 </div>
 
+</Section>
+
+<Section title='<span style="color: #1354A2;">What</span> <span style="color: #FFC500;">NanoKnow<sup style="font-size: 0.5em; margin-left: 0.1em;">™</sup></span> <span style="color: #1354A2;">Does</span>'>
+
 <Grid columns={3}>
   <Card title="Shared Knowledge Base" icon="open-book" iconColor="#1354A2">
-    We’re building a collaborative library of SOPs, process notes, and equipment documentation that captures and preserves practical know-how.
+    Bring together SOPs, process notes, manuals, training materials, troubleshooting guides, equipment documentation, and data in one searchable knowledge base.
   </Card>
 
-  <a href="https://forum.nanoknow.org" target="_blank" rel="noopener" style="text-decoration: none; color: inherit; display: block;">
-    <Card title="Community Forum" icon="puzzle" iconColor="#FFC500">
-      Connect with researchers, engineers, and students sharing real nanofabrication experience — breaking down technical barriers to enable faster, more impactful research.
-    </Card>
-  </a>
+  <Card title="Structured Metadata" icon="puzzle" iconColor="#FFC500">
+    Connect knowledge to tools, processes, materials, facilities, contributors, and context so information can be organized, attributed, and reused.
+  </Card>
   
   <Card title="AI-Assisted Discovery" icon="rocket" iconColor="#1354A2">
-    Our next step is integrating intelligent tools to help researchers find relevant documents, link related topics, and uncover insights faster.
+    Use intelligent agentic search and retrieval to help users find relevant fabrication knowledge faster — with cited sources and clear provenance so results can be trusted and traced back to their origin.
   </Card>
 </Grid>
+
+</Section>
+
+<Section title='<span style="color: #1354A2;">Why</span> <span style="color: #FFC500;">NanoKnow<sup style="font-size: 0.5em; margin-left: 0.1em;">™</sup></span><span style="color: #FFC500;">?</span>' description='<span style="font-size: 2rem; font-weight: 400; letter-spacing: 0;">Turning scattered nanofabrication knowledge into shared progress.</span>'>
+
+<div class="prose dark:prose-invert max-w-4xl mx-auto mb-16 mt-10 text-lg text-left">
+  <p>
+    Nanofabrication facilities generate enormous practical knowledge every day — how to train users, operate tools, develop processes, troubleshoot failures, and support complex research. But much of this knowledge remains local and difficult to find: scattered across internal documents, websites, folders, manuals, staff experience, and informal conversations.
+  </p>
+  <p>
+    Across the national nanofabrication ecosystem, many facilities face similar challenges. When knowledge is hard to access, even within a single facility, staff and researchers spend valuable time rebuilding documentation, repeating process development, and solving problems that others have already encountered.
+  </p>
+  <p>
+    NanoKnow helps change this by creating an open, AI-enabled platform for organizing and sharing fabrication knowledge across institutions. By making documentation, training resources, process expertise, and troubleshooting insight easier to discover and reuse, NanoKnow can help accelerate research, improve training, reduce duplicated effort, and support the transition from academic discovery to real-world technology development.
+  </p>
+</div>
+
+</Section>
+
+<Section title='<span style="color: #1354A2;">Participating</span> <span style="color: #FFC500;">Facilities</span>' description='<span style="font-size: 2rem; font-weight: 400; letter-spacing: 0;">Partnering to advance nanofabrication knowledge.</span>'>
+
+<div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; max-width: 1100px; margin: 0 auto;">
+  <LogoCard
+    src={stanfordLogo.src}
+    alt="Stanford nano@stanford"
+    name="Stanford nano@stanford"
+    href="https://nanolabs.stanford.edu/"
+  />
+  <LogoCard
+    src={cornellLogo.src}
+    alt="Cornell NanoScale Science and Technology Facility"
+    name="Cornell CNF"
+    href="https://www.cnf.cornell.edu/"
+  />
+  <LogoCard
+    src={pmiLogo.src}
+    alt="Princeton Materials Institute"
+    name="Princeton Materials Institute"
+    href="https://mnfc.princeton.edu/"
+  />
+  <LogoCard
+    src={asrcLogo.src}
+    alt="Advanced Science Research Center, CUNY"
+    name="CUNY ASRC"
+    href="https://asrc.gc.cuny.edu/facilities/nanofabrication/"
+  />
+</div>
+
+<div class="prose dark:prose-invert max-w-4xl mx-auto mt-16 text-lg text-left">
+  <p>
+    The facilities shown here represent early collaborators and knowledge contributors helping demonstrate NanoKnow's vision for shared nanofabrication knowledge. NanoKnow welcomes interest from additional facilities, institutions, researchers, staff, and community partners. To explore participation, contribute resources, or receive updates, please register your interest through the Sign Up page at the link below.
+  </p>
+</div>
+
+<div style="text-align: center; margin-top: 2.5rem;">
+  <a href="https://airtable.com/embed/appc8JGxt5AUaVVj3/pagYCkatWF7Bl4816/form" target="_blank" rel="noopener" style="display: inline-block; background: #1354A2; color: #fff; padding: 0.75rem 2rem; border-radius: 0.5rem; font-weight: 600; text-decoration: none; font-size: 1.1rem;">Register Your Interest</a>
+</div>
 
 </Section>

@@ -16,6 +16,9 @@ const { title, logo, logo_darkmode } = site;
 
 // https://astro.build/config
 export default defineConfig({
+  redirects: {
+    "/nanofabs_map.html": "/nanofab_map.html",
+  },
   image: {
     service: { entrypoint: "astro/assets/services/noop" },
   },
@@ -41,8 +44,7 @@ export default defineConfig({
         ContentPanel: "./src/components/override-components/ContentPanel.astro",
         Pagination: "./src/components/override-components/Pagination.astro",
         Sidebar: "./src/components/override-components/Sidebar.astro",
-        
-        
+        Footer: "./src/components/override-components/Footer.astro",
       },
       
     }),

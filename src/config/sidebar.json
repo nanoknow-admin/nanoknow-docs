@@ -1,8 +1,12 @@
 {
   "main": [
     {
-      "label": "Vision",
+      "label": "About nanoKnow",
       "slug": "vision"
+    },
+    {
+      "label": "Participating Facilities",
+      "slug": "members"
     },
     {
       "label": "Blog",
