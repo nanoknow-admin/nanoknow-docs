@@ -10,7 +10,7 @@
     },
     {
       "name": "Participating Facilities",
-      "url": "/members/"
+      "url": "/participating-facilities/"
     },
     {
       "name": "Sign Up",
@@ -53,7 +53,7 @@
         },
         {
           "name": "Participating Facilities",
-          "url": "/members/"
+          "url": "/participating-facilities/"
         }
       ]
     },
