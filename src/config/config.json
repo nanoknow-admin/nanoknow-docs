@@ -12,7 +12,7 @@
     "theme_switcher": false
   },
   "params": {
-    "copyright": "NanoKnow, Inc. &copy; 2026 &nbsp;All rights reserved. |&nbsp; NanoKnow is a trademark of NanoKnow, Inc."
+    "copyright": "NanoKnow, Inc. &copy; 2026. All rights reserved.<br>NanoKnow is a trademark of WorldlyCode LLC, used under license by NanoKnow, Inc."
   },
   "navigation_button": {
     "enable": true,
