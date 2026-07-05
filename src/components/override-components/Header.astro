@@ -12,7 +12,10 @@ const locale = Astro.currentLocale || "en";
 
 const menu = await getTranslations(locale || "en");
 
-const { settings, navigation_button } = config;
+const { settings, navigation_buttons } = config;
+const buttons: any[] = (navigation_buttons || []).filter(
+  (button: any) => button.enable
+);
 const { main }: { main: any[] } = menu;
 const pathname = Astro.request.url;
 
@@ -44,7 +47,7 @@ const hasSidebar = Astro.locals.starlightRoute.hasSidebar;
   <!-- /navbar toggler -->
   <ul
     id="nav-menu"
-    class="navbar-nav order-3 hidden w-full pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-4 lg:pb-0 xl:space-x-8"
+    class="navbar-nav order-3 hidden w-full pb-6 lg:order-1 lg:flex lg:flex-1 lg:justify-center lg:items-center lg:gap-8 lg:pb-0 xl:gap-10"
   >
     {
       main.map((menu) => (
@@ -103,14 +106,16 @@ const hasSidebar = Astro.locals.starlightRoute.hasSidebar;
       ))
     }
     {
-      navigation_button.enable && (
-        <li class="mt-4 inline-block lg:hidden">
-          <a
-            class="btn btn-outline-primary btn-sm"
-            href={navigation_button.link}
-          >
-            {navigation_button.label}
-          </a>
+      buttons.length > 0 && (
+        <li class="mt-4 inline-block lg:hidden space-x-3">
+          {buttons.map((button) => (
+            <a class="btn btn-outline-primary btn-sm" href={button.link}>
+              {button.translations
+                ? // @ts-ignore
+                  button.translations[locale] || button.label
+                : button.label}
+            </a>
+          ))}
         </li>
       )
     }
@@ -132,17 +137,17 @@ const hasSidebar = Astro.locals.starlightRoute.hasSidebar;
     {settings.theme_switcher && <ThemeSwitch className="mx-6" />}
 
     {
-      navigation_button.enable && (
+      buttons.map((button) => (
         <a
-          class="btn btn-outline-primary hidden! lg:inline-block!"
-          href={navigation_button.link}
+          class="btn btn-outline-primary hidden! lg:inline-block! ml-3"
+          href={button.link}
         >
-          {navigation_button.translations
+          {button.translations
             ? // @ts-ignore
-              navigation_button.translations[locale] || navigation_button.label
-            : navigation_button.label}
+              button.translations[locale] || button.label
+            : button.label}
         </a>
-      )
+      ))
     }
   </div>
 </nav>

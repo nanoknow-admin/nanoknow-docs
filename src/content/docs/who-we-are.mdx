@@ -1,0 +1,56 @@
+---
+title: "" #keep empty string else will have splash title in the upper left of the page
+description: Meet the NanoKnow Board of Directors and AI Advisory Committee
+template: splash
+---
+
+import Section from "~/components/Section.astro";
+import Grid from "~/components/user-components/Grid.astro";
+import PersonCard from "~/components/user-components/PersonCard.astro";
+
+<Section title='<span style="color: var(--color-lightmode-primary);">Who We Are</span>' titleClass="text-7xl">
+
+<div style="margin-top: 2rem; text-align: center;">
+  <h2 style="color: var(--color-lightmode-primary); font-size: 2.25rem; font-weight: 600;">Board of Directors</h2>
+</div>
+
+<div style="margin-top: 2.5rem;"></div>
+
+<Grid columns={3}>
+  <PersonCard
+    name="Samantha Roberts"
+    role="Board of Directors"
+    bio="Bio coming soon."
+  />
+  <PersonCard
+    name="Mary Tang"
+    role="Board of Directors"
+    bio="Bio coming soon."
+  />
+  <PersonCard
+    name="Claudius Mundoma"
+    role="Board of Directors"
+    bio="Bio coming soon."
+  />
+</Grid>
+
+<div style="margin-top: 5rem; text-align: center;">
+  <h2 style="color: var(--color-lightmode-primary); font-size: 2.25rem; font-weight: 600;">AI Advisory Committee</h2>
+</div>
+
+<div style="margin-top: 2.5rem; max-width: 48rem; margin-left: auto; margin-right: auto;">
+  <Grid columns={2}>
+    <PersonCard
+      name="Aakash Rao Nallabothula Surya"
+      role="AI Advisory Committee"
+      bio="Bio coming soon."
+    />
+    <PersonCard
+      name="Vijay Narasimhan"
+      role="AI Advisory Committee"
+      bio="Bio coming soon."
+    />
+  </Grid>
+</div>
+
+</Section>

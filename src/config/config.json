@@ -14,12 +14,22 @@
   "params": {
     "copyright": "NanoKnow, Inc. &copy; 2026. All rights reserved.<br>NanoKnow is a trademark of WorldlyCode LLC, used under license by NanoKnow, Inc."
   },
-  "navigation_button": {
-    "enable": true,
-    "label": "Login",
-    "translations": {
-      "de": "Anmelden"
+  "navigation_buttons": [
+    {
+      "enable": true,
+      "label": "Join",
+      "translations": {
+        "de": "Beitreten"
+      },
+      "link": "/sign-up/"
     },
-    "link": "https://app.nanoknow.org/login"
-  }
+    {
+      "enable": true,
+      "label": "Login",
+      "translations": {
+        "de": "Anmelden"
+      },
+      "link": "https://app.nanoknow.org/login"
+    }
+  ]
 }

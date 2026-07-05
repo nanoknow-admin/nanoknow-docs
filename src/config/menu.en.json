@@ -2,19 +2,16 @@
   "main": [
     {
       "name": "About",
-      "url": "/"
-    },
-    {
-      "name": "Vision",
-      "url": "/vision/"
+      "hasChildren": true,
+      "children": [
+        { "name": "Overview", "url": "/" },
+        { "name": "Vision", "url": "/vision/" },
+        { "name": "Who We Are", "url": "/who-we-are/" }
+      ]
     },
     {
       "name": "Participating Facilities",
       "url": "/participating-facilities/"
-    },
-    {
-      "name": "Join",
-      "url": "/sign-up/"
     },
     {
       "name": "Resources",
@@ -49,6 +46,10 @@
         {
           "name": "Participating Facilities",
           "url": "/participating-facilities/"
+        },
+        {
+          "name": "Who We Are",
+          "url": "/who-we-are/"
         }
       ]
     },
