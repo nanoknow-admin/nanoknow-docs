@@ -6,7 +6,7 @@
       "children": [
         { "name": "Overview", "url": "/" },
         { "name": "Vision", "url": "/vision/" },
-        { "name": "Who We Are", "url": "/who-we-are/" }
+        { "name": "Leadership", "url": "/leadership/" }
       ]
     },
     {
@@ -27,8 +27,12 @@
       "title": "Community",
       "links": [
         {
+          "name": "Participating Facilities",
+          "url": "/participating-facilities/"
+        },
+        {
           "name": "Join",
-          "url": "/sign-up/"
+          "url": "/join/"
         },
         {
           "name": "Contact Us",
@@ -40,16 +44,16 @@
       "title": "About",
       "links": [
         {
-          "name": "NanoKnow Vision",
+          "name": "Overview",
+          "url": "/"
+        },
+        {
+          "name": "Vision",
           "url": "/vision/"
         },
         {
-          "name": "Participating Facilities",
-          "url": "/participating-facilities/"
-        },
-        {
-          "name": "Who We Are",
-          "url": "/who-we-are/"
+          "name": "Leadership",
+          "url": "/leadership/"
         }
       ]
     },
