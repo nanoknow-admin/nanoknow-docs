@@ -3,8 +3,8 @@
     "title": "NanoKnow",
     "logo": "/src/assets/logo.png",
     "logo_darkmode": "/src/assets/logo.png",
-    "logo_width": "250",
-    "logo_height": "65",
+    "logo_width": "190",
+    "logo_height": "48",
     "logo_text": "NanoKnow"
   },
   "settings": {
