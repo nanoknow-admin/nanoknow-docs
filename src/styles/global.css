@@ -110,6 +110,27 @@
   --sl-color-black: var(--color-lightmode-dark);
 }
 
+/* Underline + brand-blue links inside legal page body copy (privacy/terms/choices),
+   matching the styled links used elsewhere on the site. */
+.legal-content a {
+  color: var(--color-lightmode-primary);
+  text-decoration: underline;
+}
+
+/* Consistent brand-mark coloring for "NanoKnow" wherever it appears as a heading. */
+.brand-nano {
+  color: var(--color-lightmode-primary);
+}
+.brand-know,
+.brand-tm {
+  color: var(--color-primary);
+}
+.brand-tm {
+  font-size: 0.5em;
+  margin-left: 0.1em;
+  vertical-align: super;
+}
+
 @theme {
   --color-primary-gradient: linear-gradient(
     35.65deg,
