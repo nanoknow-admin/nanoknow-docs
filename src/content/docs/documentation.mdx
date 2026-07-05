@@ -9,7 +9,7 @@ import Card from "~/components/user-components/NewCard.astro";
 import Grid from "~/components/user-components/Grid.astro";
 import LinkButton from "~/components/LinkButton.astro";
 
-<Section title='<span style="color: #1354A2;">Resources and</span> <span style="color: #dec331;">Documents</span>' description="COMING SOON" titleClass="text-7xl">
+<Section title='<span style="color: var(--color-lightmode-primary);">Resources and</span> <span style="color: var(--color-primary);">Documents</span>' description="COMING SOON" titleClass="text-7xl">
 
 <div style="margin-top: 4rem;"></div>
 
@@ -23,15 +23,15 @@ We're building a comprehensive knowledge base for the nanofabrication community.
 
 
 <Grid columns={3}>
-  <Card title="Equipment & Processes" icon="seti:config" iconColor="#1354A2">
+  <Card title="Equipment & Processes" icon="seti:config" iconColor="var(--color-lightmode-primary)">
     Detailed guides for lithography, etching, deposition, and characterization equipment.
   </Card>
   
-  <Card title="Best Practices" icon="approve-check" iconColor="#FFC500">
+  <Card title="Best Practices" icon="approve-check" iconColor="var(--color-primary)">
     Safety protocols, clean room guidelines, and maintenance procedures.
   </Card>
   
-  <Card title="FAB Facilities" icon="seti:folder" iconColor="#1354A2">
+  <Card title="FAB Facilities" icon="seti:folder" iconColor="var(--color-lightmode-primary)">
     Network of participating facilities sharing knowledge and resources.
   </Card>
 </Grid>

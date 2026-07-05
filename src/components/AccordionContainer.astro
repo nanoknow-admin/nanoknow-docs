@@ -208,13 +208,13 @@ const { tabList } = Astro.props;
       }
     }
     .active-tab .stop-color-1 {
-      stop-color: #3a1c71;
+      stop-color: color-mix(in srgb, var(--color-lightmode-primary), #000 60%);
     }
     .active-tab .stop-color-2 {
-      stop-color: var(--color-primary);
+      stop-color: var(--color-lightmode-primary);
     }
     .active-tab .stop-color-3 {
-      stop-color: #ffca7b;
+      stop-color: color-mix(in srgb, var(--color-lightmode-primary), #fff 40%);
     }
     .accordion-list {
       margin-top: 0 !important;

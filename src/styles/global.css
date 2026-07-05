@@ -108,20 +108,14 @@
 
 
   --sl-color-black: var(--color-lightmode-dark);
-  --color-primary-gradient: linear-gradient(
-    35.65deg,
-    #3a1c71 -10.94%,
-    #e8a737 61.04%,
-    #ffca7b 133.01%
-  );
 }
 
 @theme {
   --color-primary-gradient: linear-gradient(
     35.65deg,
-    #0a2d5c -10.94%,
-    #1354A2 61.04%,
-    #5B9BD5 133.01%
+    color-mix(in srgb, var(--color-lightmode-primary), #000 60%) -10.94%,
+    var(--color-lightmode-primary) 61.04%,
+    color-mix(in srgb, var(--color-lightmode-primary), #fff 40%) 133.01%
   );
 }
 

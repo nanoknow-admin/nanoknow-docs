@@ -9,7 +9,7 @@ import Card from "~/components/user-components/NewCard.astro";
 import Grid from "~/components/user-components/Grid.astro";
 import LinkButton from "~/components/LinkButton.astro";
 
-<Section title='<span style="color: #1354A2;">Sharing Knowledge</span> <span style="color: #dec331;">Building Community</span>' description="COMING SOON" titleClass="text-7xl">
+<Section title='<span style="color: var(--color-lightmode-primary);">Sharing Knowledge</span> <span style="color: var(--color-primary);">Building Community</span>' description="COMING SOON" titleClass="text-7xl">
 
 <div style="margin-top: 4rem;"></div>
 
@@ -21,17 +21,17 @@ import LinkButton from "~/components/LinkButton.astro";
 
 <Grid columns={3}>
 
-    <Card title="Getting Started with Nanofabrication" icon="rocket" iconColor="#305cde">
+    <Card title="Getting Started with Nanofabrication" icon="rocket" iconColor="var(--color-lightmode-primary)">
       Learn the fundamentals of nanofabrication techniques and best practices for beginners in the field.
     </Card>
 
 
-    <Card title="Clean Room Best Practices" icon="seti:config" iconColor="#dec331">
+    <Card title="Clean Room Best Practices" icon="seti:config" iconColor="var(--color-primary)">
       Essential guidelines and tips for maintaining optimal clean room conditions and protocols.
     </Card>
 
 
-    <Card title="Community Highlights" icon="puzzle" iconColor="#5B9BD5">
+    <Card title="Community Highlights" icon="puzzle" iconColor="var(--color-lightmode-primary)">
       Celebrating contributions and innovations from the NanoKnow community around the world.
     </Card>
 
