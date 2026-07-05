@@ -13,7 +13,7 @@
       "url": "/participating-facilities/"
     },
     {
-      "name": "Sign Up",
+      "name": "Join",
       "url": "/sign-up/"
     },
     {
@@ -21,22 +21,17 @@
       "hasChildren": true,
       "children": [
         { "name": "U.S. Facility List", "url": "/us-facilities/" },
-        { "name": "Community Forum", "url": "https://forum.nanoknow.org/" },
         { "name": "Nanobot Chat", "url": "https://nanobot.chat/" }
       ]
     }
   ],
   "footer": {
     "community": {
-      "title": "Join Our Community",
+      "title": "Community",
       "links": [
         {
-          "name": "Sign Up",
+          "name": "Join",
           "url": "/sign-up/"
-        },
-        {
-          "name": "Discourse Community",
-          "url": "https://forum.nanoknow.org/"
         },
         {
           "name": "Contact Us",
@@ -61,8 +56,8 @@
       "title": "Coming Soon",
       "links": [
         {
-          "name": "Documentation Hub",
-          "url": "/documentation/"
+          "name": "NanoKnow Commons",
+          "url": "https://app.nanoknow.org"
         },
         {
           "name": "Blog",

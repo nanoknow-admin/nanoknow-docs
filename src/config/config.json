@@ -16,10 +16,10 @@
   },
   "navigation_button": {
     "enable": true,
-    "label": "Contact",
+    "label": "Login",
     "translations": {
-      "de": "Kontakt"
+      "de": "Anmelden"
     },
-    "link": "/contact/"
+    "link": "https://app.nanoknow.org/login"
   }
 }
