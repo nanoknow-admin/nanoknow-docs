@@ -17,19 +17,11 @@
   "navigation_buttons": [
     {
       "enable": true,
-      "label": "Join",
+      "label": "Explore the Commons",
       "translations": {
-        "de": "Beitreten"
+        "de": "Commons entdecken"
       },
-      "link": "/join/"
-    },
-    {
-      "enable": true,
-      "label": "Login",
-      "translations": {
-        "de": "Anmelden"
-      },
-      "link": "https://app.nanoknow.org/login"
+      "link": "https://app.nanoknow.org"
     }
   ]
 }

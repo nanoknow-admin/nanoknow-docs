@@ -1,0 +1,222 @@
+---
+interface Props {
+  href?: string;
+}
+
+const { href = "https://app.nanoknow.org" } = Astro.props;
+---
+
+<a
+  class="commons-card group"
+  href={href}
+  aria-label="Explore NanoKnow Commons — opens app.nanoknow.org"
+>
+  <div class="commons-card__content">
+    <span class="commons-card__badge">
+      <span class="commons-card__pulse"></span>
+      Now launching
+    </span>
+
+    <h2 class="commons-card__title">
+      Our first platform for shared nanofabrication knowledge
+    </h2>
+
+    <p class="commons-card__lede">
+      <strong>NanoKnow Commons</strong> is a community-built hub that brings
+      nanofabrication documents, practical knowledge, and expertise together in
+      one place. Browse, search, and ask questions with answers grounded in
+      <strong>cited sources</strong>.
+    </p>
+
+    <span class="commons-card__cta">
+      Explore the Commons
+      <svg
+        class="commons-card__arrow"
+        width="18"
+        height="18"
+        viewBox="0 0 18 18"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M10.3209 0.715753L17.3509 7.84376C17.7823 8.28117 17.7823 8.99035 17.3509 9.42776L10.3209 16.5558C9.88952 16.9932 9.1901 16.9932 8.7587 16.5558C8.32731 16.1184 8.32731 15.4092 8.7587 14.9718L13.9029 9.75582H1.10465C0.494569 9.75582 0 9.25435 0 8.63576C0 8.01717 0.494569 7.5157 1.10465 7.5157H13.9029L8.7587 2.29975C8.32731 1.86234 8.32731 1.15316 8.7587 0.715753C9.1901 0.278343 9.88952 0.278343 10.3209 0.715753Z"
+          fill="currentColor"></path>
+      </svg>
+    </span>
+  </div>
+</a>
+
+<style>
+  @layer starlight.components {
+    .commons-card {
+      position: relative;
+      overflow: hidden;
+      display: block;
+      max-width: 52rem;
+      margin: 0 auto;
+      padding: 2.5rem;
+      border-radius: 1.5rem;
+      text-align: center;
+      text-decoration: none;
+      color: var(--sl-color-white);
+      background:
+        radial-gradient(
+          120% 140% at 100% 0%,
+          color-mix(in srgb, var(--color-lightmode-primary) 14%, transparent) 0%,
+          transparent 55%
+        ),
+        var(--sl-color-black);
+      border: 1px solid var(--sl-color-gray-6);
+      transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+    }
+
+    /* Gradient border on hover, matching the site's card language. */
+    .commons-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      padding: 1px;
+      background: var(--color-primary-gradient);
+      border-radius: inherit;
+      mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      mask-composite: xor;
+      -webkit-mask-composite: xor;
+      opacity: 0.5;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .commons-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 60px -20px
+        color-mix(in srgb, var(--color-lightmode-primary) 45%, transparent);
+    }
+
+    .commons-card:hover::before {
+      opacity: 1;
+    }
+
+    .commons-card__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Solid brand-gold pill (no gradient). */
+    .commons-card__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+      border: 1px solid
+        color-mix(in srgb, var(--color-primary) 35%, transparent);
+    }
+
+    .commons-card__pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      box-shadow: 0 0 0 0
+        color-mix(in srgb, var(--color-primary) 70%, transparent);
+      animation: commons-pulse 2s infinite;
+    }
+
+    @keyframes commons-pulse {
+      0% {
+        box-shadow: 0 0 0 0
+          color-mix(in srgb, var(--color-primary) 70%, transparent);
+      }
+      70% {
+        box-shadow: 0 0 0 8px transparent;
+      }
+      100% {
+        box-shadow: 0 0 0 0 transparent;
+      }
+    }
+
+    .commons-card__title {
+      font-size: 2.25rem;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin: 1.1rem 0 0;
+      max-width: 26ch;
+      text-wrap: balance;
+      color: var(--sl-color-white);
+    }
+
+    .commons-card__lede {
+      margin: 1rem 0 0;
+      font-size: 1.15rem;
+      line-height: 1.6;
+      color: var(--color-text);
+      max-width: 32rem;
+    }
+
+    .commons-card__lede strong {
+      color: var(--sl-color-white);
+      font-weight: 600;
+    }
+
+    .commons-card__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 1.75rem;
+      padding: 0.8rem 1.5rem;
+      border-radius: 0.85rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #fff;
+      background: var(--color-primary-gradient);
+      transition: filter 0.3s ease;
+    }
+
+    .commons-card:hover .commons-card__cta {
+      filter: brightness(1.08);
+    }
+
+    .commons-card__arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .commons-card:hover .commons-card__arrow {
+      transform: translateX(4px);
+    }
+
+    /* Light mode: the card keeps its dark surface, so force light text. */
+    :root[data-theme="light"] .commons-card {
+      color: #fff;
+    }
+    :root[data-theme="light"] .commons-card__lede {
+      color: color-mix(in srgb, #fff 85%, transparent);
+    }
+    :root[data-theme="light"] .commons-card__lede strong,
+    :root[data-theme="light"] .commons-card__title {
+      color: #fff;
+    }
+
+    @media (max-width: 900px) {
+      .commons-card {
+        padding: 2rem 1.5rem;
+      }
+      .commons-card__title {
+        font-size: 1.85rem;
+      }
+    }
+  }
+</style>

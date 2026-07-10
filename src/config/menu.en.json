@@ -20,6 +20,10 @@
         { "name": "U.S. Facility List", "url": "/us-facilities/" },
         { "name": "Nanobot Chat", "url": "https://nanobot.chat/" }
       ]
+    },
+    {
+      "name": "Get Involved",
+      "url": "/join/"
     }
   ],
   "footer": {
