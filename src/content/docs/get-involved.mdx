@@ -1,36 +1,28 @@
 ---
-title: "" #keep empty string else will have splash title in the upper left of the page
-description: Join the NanoKnow community and help us grow
+title: ""
+description: Participate in the NanoKnow community
 template: splash
+head:
+  - tag: title
+    content: Get Involved | NanoKnow
 ---
 
 import Section from "~/components/Section.astro";
-import Card from "~/components/user-components/NewCard.astro";
-import Grid from "~/components/user-components/Grid.astro";
-import LinkButton from "~/components/LinkButton.astro";
 
-<Section title='<span style="color: var(--color-lightmode-primary);">Contribute To NanoKnow<sup style="font-size: 0.5em; margin-left: 0.1em; vertical-align: super;">™</sup></span>' description='<span style="font-size: 2rem; font-weight: 400; letter-spacing: 0;">Your expertise can help others learn and grow</span>' titleClass="text-7xl">
+<Section title='<span style="color: var(--color-lightmode-primary);">Participate in NanoKnow<sup style="font-size: 0.5em; margin-left: 0.1em; vertical-align: super;">™</sup></span>' titleClass="text-7xl">
 
-<div style="margin-top: 4rem;"></div>
+<div style="margin-top: 2rem;"></div>
 
-<Grid columns={3}>
-  <Card title="Contribute Documentation" icon="seti:notebook" iconColor="var(--color-lightmode-primary)">
-    Share your knowledge by writing guides, tutorials, or equipment documentation. Help us build the knowledge base.
-  </Card>
-  
-   <a href="https://forum.nanoknow.org" target="_blank" rel="noopener" style="text-decoration: none; color: inherit; display: block;">
-    <Card title="Join the Community" icon="puzzle" iconColor="var(--color-primary)">
-      Participate in our Discourse forum, answer questions, and connect with other nanofab professionals.
-    </Card>
-  </a>
-  
-  <a href="/contact/" target="_blank" rel="noopener" style="text-decoration: none; color: inherit; display: block;">
-  <Card title="Get in Touch" icon="rocket" iconColor="var(--color-lightmode-primary)">
-    Reach out to collaborate, suggest improvements, or learn more about contributing to NanoKnow.
-  </Card>
-  </a>
-</Grid>
+<div class="prose dark:prose-invert max-w-3xl mx-auto text-lg" style="margin-bottom: 2rem; text-align: left;">
 
+NanoKnow is currently collecting information from individuals and organizations interested in shared nanofabrication knowledge. Whether you represent a facility or institution, work in research, industry, education, or facility operations, or simply want to stay connected, please fill out the form below.
+
+We'll use this information to share NanoKnow updates, community opportunities, and ways to participate. Please review our <a href="/legal/privacy-policy/" style="text-decoration: underline; color: var(--color-lightmode-primary);">Privacy Policy</a> and <a href="/legal/terms-of-service/" style="text-decoration: underline; color: var(--color-lightmode-primary);">Terms of Service</a> before submitting.
+
+</div>
+
+<div style="text-align: center; margin: 2rem auto;">
+  <a href="https://airtable.com/embed/appc8JGxt5AUaVVj3/pagYCkatWF7Bl4816/form" target="_blank" rel="noopener" style="display: inline-block; background: var(--color-lightmode-primary); color: #fff; padding: 0.75rem 2rem; border-radius: 0.5rem; font-weight: 600; text-decoration: none; font-size: 1.1rem;">Open the Interest Form</a>
+</div>
 
 </Section>
-

@@ -77,6 +77,8 @@ const hasSidebar = Astro.locals.starlightRoute.hasSidebar;
                     <a
                       href={child.url}
                       aria-label={child.name}
+                      target={/^https?:\/\//.test(child.url) ? "_blank" : undefined}
+                      rel={/^https?:\/\//.test(child.url) ? "noopener noreferrer" : undefined}
                       class={`nav-dropdown-link block ${
                         (pathname === `${child.url}/` ||
                           pathname === child.url) &&

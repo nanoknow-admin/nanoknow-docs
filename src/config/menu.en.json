@@ -23,7 +23,7 @@
     },
     {
       "name": "Get Involved",
-      "url": "/join/"
+      "url": "/get-involved/"
     }
   ],
   "footer": {
@@ -36,7 +36,7 @@
         },
         {
           "name": "Participate",
-          "url": "/join/"
+          "url": "/get-involved/"
         },
         {
           "name": "Contact Us",
