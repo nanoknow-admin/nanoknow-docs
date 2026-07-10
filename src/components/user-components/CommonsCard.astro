@@ -33,9 +33,11 @@ const { href = "https://app.nanoknow.org" } = Astro.props;
     <a
       class="commons-card__cta"
       href={href}
-      aria-label="Open NanoKnow Commons — opens app.nanoknow.org"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="NanoKnow Commons — opens app.nanoknow.org"
     >
-      Open NanoKnow Commons
+      NanoKnow Commons
       <svg
         class="commons-card__arrow"
         width="18"

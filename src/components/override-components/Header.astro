@@ -109,7 +109,12 @@ const hasSidebar = Astro.locals.starlightRoute.hasSidebar;
       buttons.length > 0 && (
         <li class="mt-4 inline-block lg:hidden space-x-3">
           {buttons.map((button) => (
-            <a class="btn btn-outline-primary btn-sm" href={button.link}>
+            <a
+              class="btn btn-outline-primary btn-sm"
+              href={button.link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {button.translations
                 ? // @ts-ignore
                   button.translations[locale] || button.label
@@ -141,6 +146,8 @@ const hasSidebar = Astro.locals.starlightRoute.hasSidebar;
         <a
           class="btn btn-outline-primary hidden! lg:inline-block! ml-3"
           href={button.link}
+          target="_blank"
+          rel="noopener noreferrer"
         >
           {button.translations
             ? // @ts-ignore
