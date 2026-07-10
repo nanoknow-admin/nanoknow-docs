@@ -9,27 +9,27 @@ const { href = "https://app.nanoknow.org" } = Astro.props;
 <a
   class="commons-card group"
   href={href}
-  aria-label="Explore NanoKnow Commons — opens app.nanoknow.org"
+  aria-label="Open NanoKnow Commons — opens app.nanoknow.org"
 >
   <div class="commons-card__content">
     <span class="commons-card__badge">
       <span class="commons-card__pulse"></span>
-      Now launching
+      Going live at UGIM on July 22
     </span>
 
     <h2 class="commons-card__title">
-      Our first platform for shared nanofabrication knowledge
+      Launching our first platform: NanoKnow Commons
     </h2>
 
     <p class="commons-card__lede">
-      <strong>NanoKnow Commons</strong> is a community-built hub that brings
-      nanofabrication documents, practical knowledge, and expertise together in
-      one place. Browse, search, and ask questions with answers grounded in
-      <strong>cited sources</strong>.
+      An <strong>AI-powered</strong>, community-built hub that brings
+      nanofabrication documents, data, practical knowledge, and expertise
+      together in one place. Browse, search, and chat in plain language and get
+      answers grounded in <strong>cited sources</strong>.
     </p>
 
     <span class="commons-card__cta">
-      Explore the Commons
+      Open NanoKnow Commons
       <svg
         class="commons-card__arrow"
         width="18"
@@ -120,29 +120,27 @@ const { href = "https://app.nanoknow.org" } = Astro.props;
       padding: 0.35rem 0.85rem;
       border-radius: 999px;
       font-size: 0.8rem;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.02em;
       text-transform: uppercase;
-      color: var(--color-primary);
-      background: color-mix(in srgb, var(--color-primary) 12%, transparent);
-      border: 1px solid
-        color-mix(in srgb, var(--color-primary) 35%, transparent);
+      color: #1a1a1a;
+      background: var(--color-primary);
+      box-shadow: 0 0 18px
+        color-mix(in srgb, var(--color-primary) 45%, transparent);
     }
 
     .commons-card__pulse {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--color-primary);
-      box-shadow: 0 0 0 0
-        color-mix(in srgb, var(--color-primary) 70%, transparent);
+      background: #1a1a1a;
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5);
       animation: commons-pulse 2s infinite;
     }
 
     @keyframes commons-pulse {
       0% {
-        box-shadow: 0 0 0 0
-          color-mix(in srgb, var(--color-primary) 70%, transparent);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.45);
       }
       70% {
         box-shadow: 0 0 0 8px transparent;

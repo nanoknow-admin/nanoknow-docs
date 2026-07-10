@@ -17,9 +17,9 @@
   "navigation_buttons": [
     {
       "enable": true,
-      "label": "Explore the Commons",
+      "label": "Open NanoKnow Commons",
       "translations": {
-        "de": "Commons entdecken"
+        "de": "NanoKnow Commons öffnen"
       },
       "link": "https://app.nanoknow.org"
     }
