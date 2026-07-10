@@ -6,16 +6,18 @@ interface Props {
 const { href = "https://app.nanoknow.org" } = Astro.props;
 ---
 
-<a
-  class="commons-card group"
-  href={href}
-  aria-label="Open NanoKnow Commons — opens app.nanoknow.org"
->
+<div class="commons-card group">
   <div class="commons-card__content">
-    <span class="commons-card__badge">
+    <a
+      class="commons-card__badge"
+      href="https://ugim2026.stanford.edu/"
+      target="_blank"
+      rel="noopener"
+      aria-label="Going live at UGIM on July 22 — opens the UGIM 2026 symposium site"
+    >
       <span class="commons-card__pulse"></span>
       Going live at UGIM on July 22
-    </span>
+    </a>
 
     <h2 class="commons-card__title">
       Launching our first platform: NanoKnow Commons
@@ -28,7 +30,11 @@ const { href = "https://app.nanoknow.org" } = Astro.props;
       answers grounded in <strong>cited sources</strong>.
     </p>
 
-    <span class="commons-card__cta">
+    <a
+      class="commons-card__cta"
+      href={href}
+      aria-label="Open NanoKnow Commons — opens app.nanoknow.org"
+    >
       Open NanoKnow Commons
       <svg
         class="commons-card__arrow"
@@ -45,9 +51,9 @@ const { href = "https://app.nanoknow.org" } = Astro.props;
           d="M10.3209 0.715753L17.3509 7.84376C17.7823 8.28117 17.7823 8.99035 17.3509 9.42776L10.3209 16.5558C9.88952 16.9932 9.1901 16.9932 8.7587 16.5558C8.32731 16.1184 8.32731 15.4092 8.7587 14.9718L13.9029 9.75582H1.10465C0.494569 9.75582 0 9.25435 0 8.63576C0 8.01717 0.494569 7.5157 1.10465 7.5157H13.9029L8.7587 2.29975C8.32731 1.86234 8.32731 1.15316 8.7587 0.715753C9.1901 0.278343 9.88952 0.278343 10.3209 0.715753Z"
           fill="currentColor"></path>
       </svg>
-    </span>
+    </a>
   </div>
-</a>
+</div>
 
 <style>
   @layer starlight.components {
@@ -112,8 +118,11 @@ const { href = "https://app.nanoknow.org" } = Astro.props;
       align-items: center;
     }
 
-    /* Solid brand-gold pill (no gradient). */
+    /* Solid brand-gold pill (no gradient). Its own link to the UGIM site,
+       raised above the CTA's stretched overlay so it stays clickable. */
     .commons-card__badge {
+      position: relative;
+      z-index: 1;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
@@ -123,10 +132,16 @@ const { href = "https://app.nanoknow.org" } = Astro.props;
       font-weight: 700;
       letter-spacing: 0.02em;
       text-transform: uppercase;
+      text-decoration: none;
       color: #1a1a1a;
       background: var(--color-primary);
       box-shadow: 0 0 18px
         color-mix(in srgb, var(--color-primary) 45%, transparent);
+    }
+
+    .commons-card__badge:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     .commons-card__pulse {
@@ -182,9 +197,19 @@ const { href = "https://app.nanoknow.org" } = Astro.props;
       border-radius: 0.85rem;
       font-size: 1.05rem;
       font-weight: 600;
+      text-decoration: none;
       color: #fff;
       background: var(--color-primary-gradient);
       transition: filter 0.3s ease;
+    }
+
+    /* Stretched-link overlay: clicking anywhere on the card (except the
+       badge, which sits above it) opens the app. */
+    .commons-card__cta::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      cursor: pointer;
     }
 
     .commons-card:hover .commons-card__cta {
