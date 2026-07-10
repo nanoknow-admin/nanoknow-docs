@@ -55,7 +55,10 @@ const { href = "https://app.nanoknow.org" } = Astro.props;
       position: relative;
       overflow: hidden;
       display: block;
-      max-width: 52rem;
+      /* Full width up to the cap: without this the flex parent (.hero-commons)
+         shrink-wraps the card to its text column. */
+      width: 100%;
+      max-width: 46rem;
       margin: 0 auto;
       padding: 2.5rem;
       border-radius: 1.5rem;
@@ -164,7 +167,7 @@ const { href = "https://app.nanoknow.org" } = Astro.props;
       font-size: 1.15rem;
       line-height: 1.6;
       color: var(--color-text);
-      max-width: 32rem;
+      max-width: 36rem;
     }
 
     .commons-card__lede strong {
