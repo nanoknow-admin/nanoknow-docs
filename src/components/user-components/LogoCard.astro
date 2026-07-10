@@ -2,11 +2,10 @@
 interface Props {
   src: string;
   alt: string;
-  name: string;
   href?: string;
 }
 
-const { src, alt, name, href } = Astro.props;
+const { src, alt, href } = Astro.props;
 const Tag = href ? "a" : "div";
 ---
 
@@ -17,7 +16,6 @@ const Tag = href ? "a" : "div";
   <div class="logo-card__image-wrap">
     <img src={src} alt={alt} class="logo-card__image" />
   </div>
-  <p class="logo-card__name">{name}</p>
 </Tag>
 
 <style>
@@ -27,7 +25,7 @@ const Tag = href ? "a" : "div";
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 2rem 1.5rem 1.5rem;
+      padding: 2rem 1.5rem;
       border-radius: 1rem;
       background: #fff;
       border: 1px solid var(--sl-color-gray-6);
@@ -74,15 +72,6 @@ const Tag = href ? "a" : "div";
       max-height: 100%;
       max-width: 100%;
       object-fit: contain;
-    }
-
-    .logo-card__name {
-      margin: 1rem 0 0;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: #333;
-      text-align: center;
-      line-height: 1.3;
     }
   }
 </style>

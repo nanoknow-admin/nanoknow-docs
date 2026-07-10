@@ -8,37 +8,53 @@ import Section from "~/components/Section.astro";
 import Grid from "~/components/user-components/Grid.astro";
 import PersonCard from "~/components/user-components/PersonCard.astro";
 
-<Section title='<span class="brand-nano">Nano</span><span class="brand-know">Know</span><sup class="brand-tm">™</sup><span style="color: var(--color-lightmode-primary);"> Leadership</span>' titleClass="text-7xl">
+<Section title='<span style="color: var(--color-lightmode-primary);">NanoKnow<sup style="font-size: 0.5em; margin-left: 0.1em; vertical-align: super;">™</sup> Leadership</span>' titleClass="text-7xl">
 
 <div style="margin-top: 2rem; text-align: center;">
-  <h2 style="color: var(--color-lightmode-primary); font-size: 2.25rem; font-weight: 600;">Board of Directors</h2>
+  <h2 style="color: var(--color-text); font-size: 2.25rem; font-weight: 600;">Board of Directors</h2>
 </div>
 
 <div style="margin-top: 2.5rem;"></div>
 
 <Grid columns={3}>
   <PersonCard
+    name="Claudius Mundoma"
+    credentials="Ph.D."
+    role="Treasurer & Co-founder"
+    image="/claudius-mundoma.jpg"
+  >
+    Claudius Mundoma, Ph.D., is currently the Director of Shared Instrumentation Facilities in the Office of the Vice Provost and Dean of Research at Stanford University.
+
+    He leads the strategy, implementation, and evaluation of the Community of Shared Research Platforms initiative (C-ShaRP), as well as oversees planning of future activities that elevate Stanford's shared facilities to the next level. Among his many core duties, he collaborates with shared facilities leadership to address strategic and operational issues that impact the community, and supports the development of new services to advance Stanford's research and education missions.
+
+    Previously, Claudius led the Core Facilities and Shared Instrumentation team as the inaugural Director in Research and Innovation at the University of Colorado Boulder. Before that, he directed the Physical Biochemistry Facility in the Institute of Molecular Biophysics at Florida State University for nearly two decades.
+
+    He is a member of the Association of Biomolecular Resource Facilities (ABRF), where he served as an Executive Board Member until 2022. He is also an Editorial Board Member of the Journal of Biomolecular Techniques (JBT).
+
+    Claudius earned his Ph.D. in non-linear dynamics of chemical reactions at West Virginia University and completed postdoctoral research in the structure and dynamics of RNA-metal interactions as potential therapeutic agents. He also holds an MBA in Strategy and Operations Management from Florida State University.
+  </PersonCard>
+  <PersonCard
     name="Samantha Roberts"
-    role="Director"
+    credentials="Ph.D."
+    role="President & Co-founder"
     image="/samantha-roberts.png"
-    bio="Bio coming soon."
-  />
+  >
+    Samantha Roberts, Ph.D., is Director of the Nanofabrication Facility at the CUNY Advanced Science Research Center (ASRC) and Research Assistant Professor at the CUNY Graduate Center. A Cornell-trained solid-state physicist, she is an expert in the design and fabrication of nanoscale devices spanning electrical, photonic, biological, and mechanical applications. Over two decades, she has held positions at Cornell, Case Western Reserve University, Columbia University, and CUNY, and has worked hands-on across many of the leading nanofabrication core facilities in the Northeast. This experience gives her a rare, cross-institutional view of how shared research facilities operate.
+
+    As an AI engineer and developer, Dr. Roberts designs and builds generative AI applications, knowledge systems, and agentic workflows to solve real operational challenges in complex research environments. Her work combines retrieval-augmented generation, structured knowledge layers, and practical AI architectures that integrate with messy data, existing infrastructure, and human workflows. She is the creator of [nanobot.chat](https://nanobot.chat), a domain-specific chatbot for nanofabrication knowledge management, and co-founder of NanoKnow<sup>™</sup>, a nonprofit AI data platform dedicated to democratizing nanofabrication knowledge across the nation's nanofabrication facilities.
+  </PersonCard>
   <PersonCard
     name="Mary Tang"
-    role="Director"
+    credentials="Ph.D."
+    role="Secretary & Co-founder"
     image="/mary_tang.jpg"
-    bio="Bio coming soon."
-  />
-  <PersonCard
-    name="Claudius Mundoma"
-    role="Director"
-    image="/claudius-mundoma.jpg"
-    bio="Bio coming soon."
-  />
+  >
+    Mary Tang received her Ph.D. in Joint Program in Biomedical Engineering from the University of California, San Francisco and Berkeley, studying DNA nanoparticles for gene delivery. Her professional experience includes working at Intel as a plasma process engineer as well as post-doctoral and research associate appointments exploring microfluidics and biosensors. She previously managed the Stanford Nanofabrication Facility (SNF) and is now Managing Director of nano@stanford, the consolidation of SNF with Stanford's Nano Shared Facilities (SNSF), providing a complete suite of nanofabrication and characterization resources supporting R&D innovation and translation. She is also the Facilities Coordinator for the Pacific Northwest AI Hardware Hub of Microelectronics Commons.
+  </PersonCard>
 </Grid>
 
 <div style="margin-top: 5rem; text-align: center;">
-  <h2 style="color: var(--color-lightmode-primary); font-size: 2.25rem; font-weight: 600;">AI Advisory Committee</h2>
+  <h2 style="color: var(--color-text); font-size: 2.25rem; font-weight: 600;">AI Advisory Committee</h2>
 </div>
 
 <div style="margin-top: 2.5rem; max-width: 48rem; margin-left: auto; margin-right: auto;">
@@ -47,12 +63,12 @@ import PersonCard from "~/components/user-components/PersonCard.astro";
       name="Aakash Rao Nallabothula Surya"
       role="AI Advisor"
       image="/aakash-ns.png"
-      bio="Bio coming soon."
-    />
+    >
+      Aakash is the founder & CEO of Jovian, an online education platform for Data Science & AI with over 500,000 registered learners. Courses designed and taught by Aakash have garnered over 20 million views online. Aakash previously worked at Twitter as a software engineer (APIs and data platforms) and holds a bachelor's degree in computer science from the Indian Institute of Technology Bombay. Aakash is also an avid blogger and open source contributor.
+    </PersonCard>
     <PersonCard
       name="Vijay Narasimhan"
       role="AI Advisor"
-      bio="Bio coming soon."
     />
   </Grid>
 </div>

@@ -2,11 +2,14 @@
 interface Props {
   name: string;
   role?: string;
-  bio?: string;
   image?: string;
+  /** Credentials (e.g. "Ph.D.") shown after the name in the bio popup only */
+  credentials?: string;
 }
 
-const { name, role, bio, image } = Astro.props;
+const { name, role, image, credentials } = Astro.props;
+const dialogName = credentials ? `${name}, ${credentials}` : name;
+const hasBio = Astro.slots.has("default");
 
 const initials = name
   .split(" ")
@@ -23,8 +26,54 @@ const initials = name
   </div>
   <p class="person-card__name">{name}</p>
   {role && <p class="person-card__role">{role}</p>}
-  {bio && <p class="person-card__bio">{bio}</p>}
+  {
+    hasBio && (
+      <>
+        <button class="person-card__read-bio" data-bio-open>
+          Read bio <span aria-hidden="true">&rarr;</span>
+        </button>
+        <dialog class="person-card__dialog" aria-label={`Bio of ${name}`}>
+          <button
+            class="person-card__dialog-close"
+            data-bio-close
+            aria-label="Close bio"
+          >
+            &times;
+          </button>
+          <div class="person-card__dialog-header">
+            <div class="person-card__dialog-avatar">
+              {image ? <img src={image} alt="" /> : <span>{initials}</span>}
+            </div>
+            <div>
+              <p class="person-card__dialog-name">{dialogName}</p>
+              {role && <p class="person-card__dialog-role">{role}</p>}
+            </div>
+          </div>
+          <div class="person-card__dialog-body">
+            <slot />
+          </div>
+        </dialog>
+      </>
+    )
+  }
 </div>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".person-card").forEach((card) => {
+    const dialog = card.querySelector("dialog");
+    const openButton = card.querySelector("[data-bio-open]");
+    if (!dialog || !openButton) return;
+
+    openButton.addEventListener("click", () => dialog.showModal());
+    dialog
+      .querySelector("[data-bio-close]")
+      ?.addEventListener("click", () => dialog.close());
+    // Close when the backdrop (the dialog element itself) is clicked
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+  });
+</script>
 
 <style>
   @layer starlight.components {
@@ -55,10 +104,15 @@ const initials = name
       -webkit-mask-composite: xor;
       opacity: 0;
       transition: opacity 0.4s ease;
+      pointer-events: none;
     }
 
     .person-card:hover::before {
       opacity: 1;
+    }
+
+    .person-card:hover {
+      transform: translateY(-0.25rem);
     }
 
     .person-card__avatar {
@@ -96,14 +150,127 @@ const initials = name
     .person-card__role {
       font-size: 0.9rem;
       font-weight: 600;
-      color: var(--color-lightmode-primary);
-      margin: 0 0 0.75rem;
+      color: var(--color-text);
+      margin: 0;
     }
 
-    .person-card__bio {
-      margin: 0;
-      font-size: clamp(var(--sl-text-body));
+    .person-card__read-bio {
+      margin-top: 1rem;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: none;
+      border: none;
+      padding: 0.25rem 0;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--sl-color-accent-high);
+    }
+
+    .person-card__read-bio span {
+      transition: transform 0.25s ease;
+    }
+
+    .person-card__read-bio:hover span {
+      transform: translateX(0.25rem);
+    }
+
+    .person-card__dialog {
+      /* Center in the viewport (CSS resets strip the browser default margin: auto) */
+      position: fixed;
+      inset: 0;
+      margin: auto;
+      width: fit-content;
+      height: fit-content;
+      max-width: min(40rem, calc(100vw - 2rem));
+      max-height: calc(100vh - 4rem);
+      overflow-y: auto;
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid var(--sl-color-gray-5);
+      background: var(--sl-color-black);
+      color: var(--sl-color-gray-2);
+      text-align: left;
+    }
+
+    .person-card__dialog::backdrop {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(2px);
+    }
+
+    .person-card__dialog-close {
+      position: absolute;
+      top: 0.75rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.75rem;
+      line-height: 1;
       color: var(--sl-color-gray-3);
+      padding: 0.25rem;
+    }
+
+    .person-card__dialog-close:hover {
+      color: var(--sl-color-white);
+    }
+
+    .person-card__dialog-header {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .person-card__dialog-avatar {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-primary-gradient);
+      flex-shrink: 0;
+    }
+
+    .person-card__dialog-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .person-card__dialog-avatar span {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .person-card__dialog-name {
+      font-size: var(--sl-text-h4);
+      color: var(--sl-color-white);
+      line-height: var(--sl-line-height-headings);
+      margin: 0 0 0.25rem;
+    }
+
+    .person-card__dialog-role {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin: 0;
+    }
+
+    .person-card__dialog-body :global(p) {
+      margin: 0 0 1rem;
+      font-size: var(--sl-text-body-sm);
+      line-height: 1.7;
+      color: var(--sl-color-gray-2);
+    }
+
+    .person-card__dialog-body :global(p:last-child) {
+      margin-bottom: 0;
     }
   }
 </style>

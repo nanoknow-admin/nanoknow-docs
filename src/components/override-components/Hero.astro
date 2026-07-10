@@ -1,34 +1,41 @@
 ---
-const { data } = Astro.locals.starlightRoute.entry;
+import CommonsCard from "~/components/user-components/CommonsCard.astro";
+
+const route = Astro.locals.starlightRoute;
+const { data } = route.entry;
 const { title = data.title, tagline } = data.hero || {};
-const { sidebar } = Astro.locals.starlightRoute;
 
-function getFirstHref(item: any): string | null {
-  if (typeof item?.href === "string" && item.href) {
-    return item.href;
-  }
-  if (item?.entries && Array.isArray(item.entries) && item.entries.length > 0) {
-    return getFirstHref(item.entries[0]);
-  }
-  return null; // No valid href found
-}
-
-// check if 404 page
-const is404 = Astro.locals.starlightRoute?.id === "404";
+// Only the homepage gets the branded, card-forward hero layout.
+const isHome = route?.id === "" || route?.entry?.slug === "";
 ---
 
-<div
-  class="hero flex flex-col items-center mx-auto px-4 sm:px-6 lg:px-8 pt-36 md:pt-44 lg:pt-56 pb-16"
-  style="min-height: min(856px, 85vh);"
->
-  {title && <h1 set:html={title} class="mb-8 text-center rounded-2xl" />}
-  {tagline && <p set:html={tagline} class="tagline-custom text-center" />}
+{
+  isHome ? (
+    <div class="hero hero--home flex flex-col items-center mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="hero-brand">
+        {title && <h1 class="hero-brand__title" set:html={title} />}
+        {tagline && <p class="hero-brand__tagline" set:html={tagline} />}
+      </div>
 
-</div>
+      <div class="hero-commons">
+        <CommonsCard href="https://app.nanoknow.org" />
+      </div>
+    </div>
+  ) : (
+    <div
+      class="hero flex flex-col items-center mx-auto px-4 sm:px-6 lg:px-8 pt-36 md:pt-44 lg:pt-56 pb-16"
+      style="min-height: min(856px, 85vh);"
+    >
+      {title && <h1 class="mb-8 text-center rounded-2xl" set:html={title} />}
+      {tagline && <p class="tagline-custom text-center" set:html={tagline} />}
+    </div>
+  )
+}
 
 <style>
   @layer starlight.core {
-    h1 {
+    /* Non-home hero title (kept for parity with other splash pages). */
+    .hero:not(.hero--home) h1 {
       font-size: 7rem !important;
       line-height: 6.5rem !important;
       letter-spacing: -4px;
@@ -49,34 +56,72 @@ const is404 = Astro.locals.starlightRoute?.id === "404";
       color: var(--color-lightmode-light) !important;
     }
     @media (max-width: 940px) {
-      h1 {
+      .hero:not(.hero--home) h1 {
         font-size: 3.5rem !important;
         line-height: 3.5rem !important;
         letter-spacing: -2px;
       }
     }
+
+    /* ---------- Home hero ---------- */
+    .hero--home {
+      /* Pulled up: the logo sits closer to the top, leaving room for the card. */
+      padding-top: clamp(4rem, 7vw, 6.5rem);
+      padding-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+
+    /* Centered wordmark: title with the tagline set like a lockup beneath it. */
+    .hero-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .hero-brand__title {
+      font-size: clamp(3.25rem, 8vw, 6.5rem) !important;
+      line-height: 1 !important;
+      letter-spacing: -3px;
+      color: var(--sl-color-white);
+      margin: 0 !important;
+    }
+
+    /* Small-caps lockup line under the wordmark. */
+    .hero-brand__tagline {
+      font-size: clamp(0.85rem, 1.6vw, 1.2rem);
+      font-weight: 500;
+      line-height: 1.3;
+      text-transform: uppercase;
+      letter-spacing: clamp(0.28em, 0.5vw, 0.42em);
+      /* Optical centering: letter-spacing adds a trailing gap after the last
+         character, so nudge the line right by half a tracking unit. */
+      text-indent: clamp(0.28em, 0.5vw, 0.42em);
+      margin: 1.1rem 0 0;
+      color: var(--color-text);
+    }
+
+    :root[data-theme="light"] .hero-brand__tagline {
+      color: var(--color-lightmode-text) !important;
+    }
+
+    .hero-commons {
+      width: 100%;
+      margin-top: clamp(1.75rem, 3.5vw, 3rem);
+      display: flex;
+      justify-content: center;
+    }
   }
 </style>
 <script>
-  const iconElements = document.querySelector("[data-icon-path]");
+  // The decorative hero background needs to match the rendered hero height.
   const heroSection = document.querySelector(".hero");
   const header = document.querySelector(".header");
-  const heroBG = document.querySelector(".hero-bg") as HTMLElement;
+  const heroBG = document.querySelector(".hero-bg") as HTMLElement | null;
 
-  const totalHeight =
-    (heroSection?.clientHeight || 0) + (header?.clientHeight || 0) + 24;
-
-  heroBG.style.height = `${totalHeight}px`;
-
-  // make image element and add the path to src
-  if (iconElements) {
-    const iconPath = iconElements.getAttribute("data-icon-path");
-
-    const img = document.createElement("img");
-    img.src = `/${iconPath}` || "";
-    img.alt = "icon";
-    img.className =
-      "inline-block h-16 sm:h-20 md:h-28 lg:h-44 w-auto rounded-2xl align-middle";
-    iconElements.replaceWith(img);
+  if (heroBG) {
+    const totalHeight =
+      (heroSection?.clientHeight || 0) + (header?.clientHeight || 0) + 24;
+    heroBG.style.height = `${totalHeight}px`;
   }
 </script>
