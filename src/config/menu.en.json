@@ -17,8 +17,7 @@
       "name": "Resources",
       "hasChildren": true,
       "children": [
-        { "name": "U.S. Facility List", "url": "/us-facilities/" },
-        { "name": "Nanobot Chat", "url": "https://nanobot.chat/" }
+        { "name": "U.S. Facility List", "url": "/us-facilities/" }
       ]
     },
     {
