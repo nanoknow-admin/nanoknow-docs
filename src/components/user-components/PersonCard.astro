@@ -88,6 +88,9 @@ const initials = name
       position: relative;
       transition: all 0.4s ease;
       height: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      overflow: hidden;
     }
 
     .person-card::before {
@@ -116,8 +119,9 @@ const initials = name
     }
 
     .person-card__avatar {
-      width: 19rem;
-      height: 19rem;
+      width: min(19rem, 100%);
+      aspect-ratio: 1;
+      height: auto;
       border-radius: 50%;
       overflow: hidden;
       display: flex;
@@ -262,14 +266,28 @@ const initials = name
       margin: 0;
     }
 
-    .person-card__dialog-body :global(p) {
+    .person-card__dialog-body :global(p),
+    .person-card__dialog-body :global(ul) {
       margin: 0 0 1rem;
       font-size: var(--sl-text-body);
       line-height: 1.7;
       color: var(--sl-color-gray-2);
     }
 
-    .person-card__dialog-body :global(p:last-child) {
+    .person-card__dialog-body :global(ul) {
+      padding-left: 1.25rem;
+    }
+
+    .person-card__dialog-body :global(li) {
+      margin-bottom: 0.35rem;
+    }
+
+    .person-card__dialog-body :global(li:last-child) {
+      margin-bottom: 0;
+    }
+
+    .person-card__dialog-body :global(p:last-child),
+    .person-card__dialog-body :global(ul:last-child) {
       margin-bottom: 0;
     }
   }

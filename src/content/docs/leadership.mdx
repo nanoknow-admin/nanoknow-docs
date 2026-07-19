@@ -8,7 +8,7 @@ head:
 ---
 
 import Section from "~/components/Section.astro";
-import Grid from "~/components/user-components/Grid.astro";
+import LeadershipGrid from "~/components/user-components/LeadershipGrid.astro";
 import PersonCard from "~/components/user-components/PersonCard.astro";
 
 <Section title='<span style="color: var(--color-lightmode-primary);">NanoKnow<sup style="font-size: 0.5em; margin-left: 0.1em; vertical-align: super;">™</sup> Leadership</span>' titleClass="text-7xl">
@@ -19,7 +19,7 @@ import PersonCard from "~/components/user-components/PersonCard.astro";
 
 <div style="margin-top: 2.5rem;"></div>
 
-<Grid columns={3}>
+<LeadershipGrid variant="board">
   <PersonCard
     name="Samantha Roberts"
     credentials="Ph.D."
@@ -54,26 +54,42 @@ import PersonCard from "~/components/user-components/PersonCard.astro";
 
     Claudius earned his Ph.D. in non-linear dynamics of chemical reactions at West Virginia University and completed postdoctoral research in the structure and dynamics of RNA-metal interactions as potential therapeutic agents. He also holds an MBA in Strategy and Operations Management from Florida State University.
   </PersonCard>
-</Grid>
+</LeadershipGrid>
 
 <div style="margin-top: 5rem; text-align: center;">
   <h2 style="color: var(--color-text); font-size: 2.25rem; font-weight: 600;">AI Advisory Committee</h2>
 </div>
 
-<div style="margin-top: 2.5rem; max-width: 48rem; margin-left: auto; margin-right: auto;">
-  <Grid columns={2}>
-    <PersonCard
-      name="Aakash Rao Nallabothula Surya"
-      role="AI Advisor"
-      image="/aakash-ns.png"
-    >
-      Aakash is the founder & CEO of Jovian, an online education platform for Data Science & AI with over 500,000 registered learners. Courses designed and taught by Aakash have garnered over 20 million views online. Aakash previously worked at Twitter as a software engineer (APIs and data platforms) and holds a bachelor's degree in computer science from the Indian Institute of Technology Bombay. Aakash is also an avid blogger and open source contributor.
-    </PersonCard>
-    <PersonCard
-      name="Vijay Narasimhan"
-      role="AI Advisor"
-    />
-  </Grid>
-</div>
+<div style="margin-top: 2.5rem;"></div>
+
+<LeadershipGrid variant="advisors">
+  <PersonCard
+    name="Aakash Rao Nallabothula Surya"
+    role="AI Advisor"
+    image="/aakash-ns.png"
+  >
+    Aakash is the founder & CEO of Jovian, an online education platform for Data Science & AI with over 500,000 registered learners. Courses designed and taught by Aakash have garnered over 20 million views online. Aakash previously worked at Twitter as a software engineer (APIs and data platforms) and holds a bachelor's degree in computer science from the Indian Institute of Technology Bombay. Aakash is also an avid blogger and open source contributor.
+  </PersonCard>
+  <PersonCard
+    name="Vijay Kris Narasimhan"
+    credentials="Ph.D."
+    role="AI Advisor"
+    image="/vijay-narasimhan.jpg"
+  >
+    With a career rooted deeply in nanoscale science and its commercial translation, Vijay has spent over 10 years weaving together the threads of nanotechnology innovation, industrial development, and digital transformation. Vijay is a scientist-turned-investor: he recently transitioned from his role as Director of R&D Collaborations at Merck KGaA, Darmstadt, Germany, to become the Director of Technology Investments and Partnerships in the corporate venture capital group.
+
+    Vijay holds a PhD in Materials Science from Stanford University, an MPhil in Nanotechnology from the University of Cambridge, an MBA jointly awarded by IE University and Brown University, and a BASc in Computer Engineering from the University of Ottawa. He has 17 peer-reviewed publications, 2,900+ citations, and 6 patent families in advanced electronics and nanostructures. His journey includes:
+
+    - Co-founding an early-stage hardware startup focused on MEMS-enabled reconfigurable RF systems.
+    - Conducting global energy-access and sustainability research at the United Nations Foundation.
+    - Publishing foundational materials science research on nanoscale optoelectronic interfaces and ferroelectric memory materials.
+    - Driving AI-enabled R&D partnerships and cross-sector sustainability initiatives in the global semiconductor industry.
+    - Leading an academic research consortium applying AI to the development of sustainable semiconductors.
+    - Serving as the chair of the external advisory board of nano@Stanford, the NSF-funded shared facilities at Stanford University.
+    - Investing in companies building the future of AI applied to physical, industrial, and deep-tech problems.
+
+    Vijay has been a longtime mentor and guest lecturer for nanofabrication courses at Stanford, and serves as a visiting faculty member at Middlebury College in Vermont, where he delivers an undergraduate class on nanotechnology. Anyone who has met Vijay knows that he finds genuine fun in every moment—whether he's working to enable new digital discoveries, working with students, or out hiking, swimming, kayaking, and taking photos. Vijay lives in Connecticut with his wife.
+  </PersonCard>
+</LeadershipGrid>
 
 </Section>

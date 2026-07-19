@@ -1,0 +1,77 @@
+---
+interface Props {
+  /** board = 3 cards full width; advisors = 2 cards centered on the same track */
+  variant: "board" | "advisors";
+}
+
+const { variant } = Astro.props;
+---
+
+<div class:list={["leadership-grid", `leadership-grid--${variant}`]}>
+  <slot />
+</div>
+
+<style>
+  @layer starlight.components {
+    .leadership-grid {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.4rem !important;
+    }
+
+    .leadership-grid > :global(*) {
+      margin-top: 0 !important;
+      min-width: 0;
+      height: 100%;
+    }
+
+    /* Phone: single column */
+    @media (max-width: 767px) {
+      .leadership-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Tablet: 2 columns (board wraps 2+1; advisors sit side by side) */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .leadership-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+    }
+
+    /*
+     * Laptop / desktop: shared 6-column track.
+     * Board cards span 2 cols each (3 equal cards).
+     * Advisor cards span 2 cols each, offset to start at col 2
+     * → half-card gutter on left and right.
+     */
+    @media (min-width: 1024px) {
+      .leadership-grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 1.7rem;
+      }
+
+      .leadership-grid--board > :global(*) {
+        grid-column: span 2;
+      }
+
+      .leadership-grid--advisors > :global(*:nth-child(1)) {
+        grid-column: 2 / span 2;
+      }
+
+      .leadership-grid--advisors > :global(*:nth-child(2)) {
+        grid-column: 4 / span 2;
+      }
+    }
+
+    @media (min-width: 1440px) {
+      .leadership-grid {
+        gap: 1.8rem;
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+</style>
