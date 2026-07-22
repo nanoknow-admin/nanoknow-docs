@@ -8,16 +8,10 @@ const { href = "https://app.nanoknow.org" } = Astro.props;
 
 <div class="commons-card group">
   <div class="commons-card__content">
-    <a
-      class="commons-card__badge"
-      href="https://ugim2026.stanford.edu/"
-      target="_blank"
-      rel="noopener"
-      aria-label="Going live at UGIM on July 22 — opens the UGIM 2026 symposium site"
-    >
+    <span class="commons-card__badge">
       <span class="commons-card__pulse"></span>
-      Going live at UGIM on July 22
-    </a>
+      NOW LIVE!
+    </span>
 
     <h2 class="commons-card__title">
       Launching our first platform: NanoKnow Commons
@@ -120,30 +114,21 @@ const { href = "https://app.nanoknow.org" } = Astro.props;
       align-items: center;
     }
 
-    /* Solid brand-gold pill (no gradient). Its own link to the UGIM site,
-       raised above the CTA's stretched overlay so it stays clickable. */
+    /* Solid brand-gold pill (no gradient). */
     .commons-card__badge {
-      position: relative;
-      z-index: 1;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.35rem 0.85rem;
+      padding: 0.35rem 1.5rem;
       border-radius: 999px;
       font-size: 0.8rem;
       font-weight: 700;
       letter-spacing: 0.02em;
       text-transform: uppercase;
-      text-decoration: none;
       color: #1a1a1a;
       background: var(--color-primary);
       box-shadow: 0 0 18px
         color-mix(in srgb, var(--color-primary) 45%, transparent);
-    }
-
-    .commons-card__badge:hover {
-      text-decoration: underline;
-      text-underline-offset: 3px;
     }
 
     .commons-card__pulse {
