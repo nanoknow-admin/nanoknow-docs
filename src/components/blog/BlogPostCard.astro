@@ -43,7 +43,7 @@ const topicLabel = topics[0];
 
   .post-row__link {
     display: grid;
-    grid-template-columns: 7.5rem 1fr auto;
+    grid-template-columns: 10.5rem 1fr auto;
     gap: 1.25rem;
     align-items: center;
     width: 100%;
@@ -68,12 +68,12 @@ const topicLabel = topics[0];
 
   /* Posts without a photo fall back to the NanoKnow mark. */
   .post-row__media {
-    width: 7.5rem;
-    height: 5rem;
+    width: 10.5rem;
+    height: 7rem;
     border-radius: 0.65rem;
     border: 1px solid color-mix(in srgb, var(--sl-color-white) 10%, transparent);
     background:
-      url("/Bulb_icon.png") no-repeat center / 2.5rem auto,
+      url("/Bulb_icon.png") no-repeat center / 3.25rem auto,
       color-mix(in srgb, var(--sl-color-white) 4%, transparent);
   }
 
@@ -107,14 +107,18 @@ const topicLabel = topics[0];
   }
 
   .post-row__excerpt {
+    --excerpt-lines: 3;
     margin: 0 0 0.65rem;
     font-size: 0.975rem;
     line-height: 1.55;
     color: var(--sl-color-gray-2);
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: var(--excerpt-lines);
     -webkit-box-orient: vertical;
     overflow: hidden;
+    /* Reserve the full clamp height so rows stay the same size regardless of
+       how short a post description is. */
+    min-height: calc(var(--excerpt-lines) * 1.55em);
   }
 
   .post-row__arrow {
@@ -125,14 +129,14 @@ const topicLabel = topics[0];
 
   @media (max-width: 640px) {
     .post-row__link {
-      grid-template-columns: 5.5rem 1fr;
+      grid-template-columns: 7rem 1fr;
       gap: 0.9rem;
       padding: 1.15rem 0;
     }
 
     .post-row__media {
-      width: 5.5rem;
-      height: 4.25rem;
+      width: 7rem;
+      height: 5.25rem;
     }
 
     .post-row__arrow {
