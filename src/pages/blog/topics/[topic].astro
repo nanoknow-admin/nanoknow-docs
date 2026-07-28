@@ -1,0 +1,44 @@
+---
+import BlogLayout from "@/layouts/BlogLayout.astro";
+import BlogListing from "@/components/blog/BlogListing.astro";
+import {
+  getAllTopics,
+  getPublishedPosts,
+  topicSlug,
+  type BlogPost,
+  type BlogTopic,
+} from "@/lib/blog";
+
+export async function getStaticPaths() {
+  const topics = await getAllTopics();
+  const posts = await getPublishedPosts();
+
+  return topics.map((topic) => ({
+    params: { topic: topic.slug },
+    props: {
+      topic,
+      posts: posts.filter((post) =>
+        post.data.topics.some((t) => topicSlug(t) === topic.slug)
+      ),
+      topics,
+    },
+  }));
+}
+
+interface Props {
+  topic: BlogTopic;
+  posts: BlogPost[];
+  topics: BlogTopic[];
+}
+
+const { topic, posts, topics } = Astro.props;
+---
+
+<BlogLayout
+  title={`${topic.label} — Blog`}
+  description={`NanoKnow blog posts about ${topic.label}`}
+>
+  <BlogListing posts={posts} topics={topics} activeSlug={topic.slug}>
+    Posts in <strong>{topic.label}</strong> ({posts.length})
+  </BlogListing>
+</BlogLayout>

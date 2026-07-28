@@ -1,0 +1,33 @@
+---
+import TopicChip from "./TopicChip.astro";
+import { topicHref, type BlogTopic } from "@/lib/blog";
+
+interface Props {
+  topics: BlogTopic[];
+  activeSlug?: string | null;
+}
+
+const { topics, activeSlug = null } = Astro.props;
+---
+
+<nav class="topic-nav" aria-label="Blog topics">
+  <TopicChip label="All" href="/blog/" active={!activeSlug} />
+  {
+    topics.map((topic) => (
+      <TopicChip
+        label={topic.label}
+        href={topicHref(topic.slug)}
+        active={activeSlug === topic.slug}
+      />
+    ))
+  }
+</nav>
+
+<style>
+  .topic-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0 0 2rem;
+  }
+</style>

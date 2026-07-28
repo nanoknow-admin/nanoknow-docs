@@ -10,7 +10,7 @@
       ]
     },
     {
-      "name": "Participating Facilities",
+      "name": "Facilities",
       "url": "/participating-facilities/"
     },
     {
@@ -23,6 +23,10 @@
     {
       "name": "Get Involved",
       "url": "/get-involved/"
+    },
+    {
+      "name": "Blog",
+      "url": "/blog/"
     }
   ],
   "footer": {

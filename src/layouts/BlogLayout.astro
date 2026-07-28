@@ -1,0 +1,42 @@
+---
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import config from "@/config/config.json";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "" } = Astro.props;
+
+/*
+ * Blog routes render through Starlight so they inherit the site chrome, the CSS
+ * reset and the `--sl-*` custom properties that only exist on Starlight routes.
+ * `template: "splash"` drops the docs sidebar and table of contents, and an
+ * empty `title` suppresses Starlight's page heading because each blog page
+ * renders its own — matching the pattern used by the content pages.
+ */
+const frontmatter = {
+  title: "",
+  description,
+  template: "splash" as const,
+  head: [{ tag: "title" as const, content: `${title} | ${config.site.title}` }],
+};
+---
+
+<StarlightPage frontmatter={frontmatter}>
+  <div class="blog-shell">
+    <slot />
+  </div>
+</StarlightPage>
+
+<style>
+  .blog-shell {
+    width: 100%;
+    max-width: 52rem;
+    min-width: 0;
+    margin: 0 auto;
+    /* Separates the post from the site footer that follows it in the panel. */
+    padding-bottom: 4rem;
+  }
+</style>

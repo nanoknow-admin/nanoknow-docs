@@ -26,6 +26,30 @@ const ctaSection = defineCollection({
   }),
 });
 
+const blog = defineCollection({
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "src/content/blog",
+  }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    author: z.string().default("NanoKnow"),
+    topics: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+    /** Publishes a teaser with no date instead of a finished post. */
+    comingSoon: z.boolean().default(false),
+    heroImage: z
+      .object({
+        src: z.string(),
+        alt: z.string(),
+      })
+      .optional(),
+  }),
+});
+
 export const collections = {
   docs: defineCollection({
     loader: docsLoader(),
@@ -33,4 +57,5 @@ export const collections = {
   }),
   i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
   ctaSection,
+  blog,
 };

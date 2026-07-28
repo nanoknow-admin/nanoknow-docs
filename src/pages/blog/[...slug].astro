@@ -1,0 +1,151 @@
+---
+import { render } from "astro:content";
+import BlogLayout from "@/layouts/BlogLayout.astro";
+import TopicChip from "@/components/blog/TopicChip.astro";
+import PostMeta from "@/components/blog/PostMeta.astro";
+import {
+  getPublishedPosts,
+  topicHref,
+  topicSlug,
+  type BlogPost,
+} from "@/lib/blog";
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: BlogPost;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, description, topics, heroImage } = post.data;
+---
+
+<BlogLayout title={title} description={description}>
+  <article class="post">
+    <!-- `not-content` keeps Starlight's prose styles off the post chrome; the
+         rendered post body below is left to inherit them. -->
+    <a class="post__back not-content" href="/blog/">← Blog</a>
+
+    {
+      heroImage && (
+        <img
+          class="post__hero not-content"
+          src={heroImage.src}
+          alt={heroImage.alt}
+          width="1200"
+          height="630"
+        />
+      )
+    }
+
+    <header class="post__header not-content">
+      {
+        topics.length > 0 && (
+          <div class="post__topics">
+            {topics.map((topic) => (
+              <TopicChip label={topic} href={topicHref(topicSlug(topic))} />
+            ))}
+          </div>
+        )
+      }
+      <h1 class="post__title">{title}</h1>
+      <p class="post__dek">{description}</p>
+      <PostMeta post={post} />
+    </header>
+
+    <div class="post__body">
+      <Content />
+    </div>
+  </article>
+</BlogLayout>
+
+<style>
+  .post {
+    max-width: 42rem;
+    margin: 0 auto;
+  }
+
+  .post__back {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--sl-color-gray-3);
+  }
+
+  .post__back:hover {
+    color: var(--color-primary);
+  }
+
+  .post__hero {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    margin: 0 0 1.75rem;
+    border-radius: 0.85rem;
+    background: #121a28;
+  }
+
+  .post__header {
+    margin-bottom: 2.25rem;
+    padding-bottom: 1.75rem;
+    border-bottom: 1px solid
+      color-mix(in srgb, var(--sl-color-white) 10%, transparent);
+  }
+
+  .post__topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .post__title {
+    margin: 0 0 0.85rem;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--sl-color-white);
+  }
+
+  .post__dek {
+    margin: 0 0 1.1rem;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--sl-color-gray-2);
+  }
+
+  .post__body {
+    font-size: 1.075rem;
+    line-height: 1.8;
+    color: var(--sl-color-gray-1);
+  }
+
+  /* Tighter heading rhythm than Starlight's prose default; colour and weight
+     are inherited from `.sl-markdown-content`. */
+  .post__body :global(h2),
+  .post__body :global(h3) {
+    margin-top: 2.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .post__body :global(p),
+  .post__body :global(ul),
+  .post__body :global(ol) {
+    margin-bottom: 1.25rem;
+  }
+
+  .post__body :global(a) {
+    color: var(--color-primary);
+  }
+</style>
