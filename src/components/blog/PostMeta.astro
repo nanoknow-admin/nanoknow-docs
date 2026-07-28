@@ -1,0 +1,54 @@
+---
+import {
+  estimateReadingMinutes,
+  formatBlogDate,
+  type BlogPost,
+} from "@/lib/blog";
+
+interface Props {
+  post: BlogPost;
+}
+
+const { post } = Astro.props;
+const { author, pubDate, updatedDate, comingSoon } = post.data;
+const minutes = estimateReadingMinutes(post.body ?? "");
+---
+
+<p class="post-meta">
+  {author}
+  <span aria-hidden="true">·</span>
+  {
+    comingSoon ? (
+      <span class="post-meta__soon">Coming soon</span>
+    ) : (
+      <>
+        <time datetime={pubDate.toISOString()}>{formatBlogDate(pubDate)}</time>
+        {updatedDate && (
+          <>
+            <span aria-hidden="true">·</span>
+            Updated {formatBlogDate(updatedDate)}
+          </>
+        )}
+        <span aria-hidden="true">·</span>
+        {minutes} min read
+      </>
+    )
+  }
+</p>
+
+<style>
+  .post-meta {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    /* Callers scale the meta line to their own density. */
+    gap: var(--post-meta-gap, 0.45rem);
+    font-size: var(--post-meta-size, 0.9rem);
+    color: var(--sl-color-gray-3);
+  }
+
+  .post-meta__soon {
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+</style>

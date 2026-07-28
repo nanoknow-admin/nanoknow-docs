@@ -4,7 +4,10 @@
   "exclude": ["dist"],
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      // Starlight internals reached by path because they are absent from its
+      // package `exports`; mapped here since `baseUrl` is deprecated.
+      "node_modules/*": ["./node_modules/*"]
     }
   }
 }

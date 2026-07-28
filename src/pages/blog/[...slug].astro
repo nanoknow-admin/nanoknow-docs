@@ -2,10 +2,11 @@
 import { render } from "astro:content";
 import BlogLayout from "@/layouts/BlogLayout.astro";
 import TopicChip from "@/components/blog/TopicChip.astro";
+import PostMeta from "@/components/blog/PostMeta.astro";
 import {
-  estimateReadingMinutes,
-  formatBlogDate,
   getPublishedPosts,
+  topicHref,
+  topicSlug,
   type BlogPost,
 } from "@/lib/blog";
 
@@ -23,17 +24,7 @@ interface Props {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const {
-  title,
-  description,
-  pubDate,
-  updatedDate,
-  author,
-  topics,
-  heroImage,
-  comingSoon,
-} = post.data;
-const minutes = estimateReadingMinutes(post.body ?? "");
+const { title, description, topics, heroImage } = post.data;
 ---
 
 <BlogLayout title={title} description={description}>
@@ -59,36 +50,14 @@ const minutes = estimateReadingMinutes(post.body ?? "");
         topics.length > 0 && (
           <div class="post__topics">
             {topics.map((topic) => (
-              <TopicChip topic={topic} />
+              <TopicChip label={topic} href={topicHref(topicSlug(topic))} />
             ))}
           </div>
         )
       }
       <h1 class="post__title">{title}</h1>
       <p class="post__dek">{description}</p>
-      <div class="post__meta">
-        {author}
-        <span aria-hidden="true">·</span>
-        {
-          comingSoon ? (
-            <span class="post__soon">Coming soon</span>
-          ) : (
-            <>
-              <time datetime={pubDate.toISOString()}>
-                {formatBlogDate(pubDate)}
-              </time>
-              {updatedDate && (
-                <>
-                  <span aria-hidden="true">·</span>
-                  Updated {formatBlogDate(updatedDate)}
-                </>
-              )}
-              <span aria-hidden="true">·</span>
-              {minutes} min read
-            </>
-          )
-        }
-      </div>
+      <PostMeta post={post} />
     </header>
 
     <div class="post__body">
@@ -156,30 +125,18 @@ const minutes = estimateReadingMinutes(post.body ?? "");
     color: var(--sl-color-gray-2);
   }
 
-  .post__meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.45rem;
-    font-size: 0.9rem;
-    color: var(--sl-color-gray-3);
-  }
-
-  .post__soon {
-    color: var(--color-primary);
-    font-weight: 500;
-  }
-
   .post__body {
     font-size: 1.075rem;
     line-height: 1.8;
     color: var(--sl-color-gray-1);
   }
 
+  /* Tighter heading rhythm than Starlight's prose default; colour and weight
+     are inherited from `.sl-markdown-content`. */
   .post__body :global(h2),
   .post__body :global(h3) {
     margin-top: 2.25rem;
     margin-bottom: 0.75rem;
-    color: var(--sl-color-white);
   }
 
   .post__body :global(p),

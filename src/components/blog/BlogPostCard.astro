@@ -1,15 +1,13 @@
 ---
 import type { BlogPost } from "@/lib/blog";
-import { estimateReadingMinutes, formatBlogDate } from "@/lib/blog";
+import PostMeta from "./PostMeta.astro";
 
 interface Props {
   post: BlogPost;
 }
 
 const { post } = Astro.props;
-const { title, description, pubDate, author, topics, heroImage, comingSoon } =
-  post.data;
-const minutes = estimateReadingMinutes(post.body ?? "");
+const { title, description, topics, heroImage } = post.data;
 const topicLabel = topics[0];
 ---
 
@@ -25,23 +23,7 @@ const topicLabel = topics[0];
       {topicLabel && <p class="post-row__topic">{topicLabel}</p>}
       <h2 class="post-row__title">{title}</h2>
       <p class="post-row__excerpt">{description}</p>
-      <p class="post-row__meta">
-        {author}
-        <span aria-hidden="true">·</span>
-        {
-          comingSoon ? (
-            <span class="post-row__soon">Coming soon</span>
-          ) : (
-            <>
-              <time datetime={pubDate.toISOString()}>
-                {formatBlogDate(pubDate)}
-              </time>
-              <span aria-hidden="true">·</span>
-              {minutes} min read
-            </>
-          )
-        }
-      </p>
+      <PostMeta post={post} />
     </div>
 
     <span class="post-row__arrow" aria-hidden="true">→</span>
@@ -103,6 +85,8 @@ const topicLabel = topics[0];
 
   .post-row__body {
     min-width: 0;
+    --post-meta-size: 0.8125rem;
+    --post-meta-gap: 0.4rem;
   }
 
   .post-row__topic {
@@ -131,20 +115,6 @@ const topicLabel = topics[0];
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-  }
-
-  .post-row__meta {
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    font-size: 0.8125rem;
-    color: var(--sl-color-gray-3);
-  }
-
-  .post-row__soon {
-    color: var(--color-primary);
-    font-weight: 500;
   }
 
   .post-row__arrow {

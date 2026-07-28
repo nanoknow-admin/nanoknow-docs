@@ -1,14 +1,14 @@
 ---
-import { topicSlug } from "@/lib/blog";
-
 interface Props {
-  topic: string;
+  label: string;
+  href: string;
+  active?: boolean;
 }
 
-const { topic } = Astro.props;
+const { label, href, active = false } = Astro.props;
 ---
 
-<a class="topic-tab" href={`/blog/topics/${topicSlug(topic)}/`}>{topic}</a>
+<a class:list={["topic-tab", active && "is-active"]} href={href}>{label}</a>
 
 <style>
   .topic-tab {
@@ -24,5 +24,11 @@ const { topic } = Astro.props;
 
   .topic-tab:hover {
     color: var(--sl-color-white);
+  }
+
+  .topic-tab.is-active {
+    color: var(--sl-color-black);
+    background: var(--color-primary);
+    border-color: var(--color-primary);
   }
 </style>

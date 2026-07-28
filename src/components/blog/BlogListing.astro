@@ -1,11 +1,11 @@
 ---
-import type { BlogPost } from "@/lib/blog";
+import type { BlogPost, BlogTopic } from "@/lib/blog";
 import BlogPostCard from "./BlogPostCard.astro";
 import BlogTopicNav from "./BlogTopicNav.astro";
 
 interface Props {
   posts: BlogPost[];
-  topics: { label: string; slug: string }[];
+  topics: BlogTopic[];
   activeSlug?: string | null;
 }
 

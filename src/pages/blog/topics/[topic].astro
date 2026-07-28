@@ -6,6 +6,7 @@ import {
   getPublishedPosts,
   topicSlug,
   type BlogPost,
+  type BlogTopic,
 } from "@/lib/blog";
 
 export async function getStaticPaths() {
@@ -25,9 +26,9 @@ export async function getStaticPaths() {
 }
 
 interface Props {
-  topic: { label: string; slug: string };
+  topic: BlogTopic;
   posts: BlogPost[];
-  topics: { label: string; slug: string }[];
+  topics: BlogTopic[];
 }
 
 const { topic, posts, topics } = Astro.props;

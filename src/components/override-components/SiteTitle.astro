@@ -2,15 +2,7 @@
 import config from "@/config/config.json" assert { type: "json" };
 import ImageMod from "../ImageMod.astro";
 
-let siteTitle = config.site.title;
-let siteTitleHref = "/";
-try {
-  const route = Astro.locals.starlightRoute;
-  siteTitle = route.siteTitle ?? siteTitle;
-  siteTitleHref = route.siteTitleHref ?? siteTitleHref;
-} catch {
-  // Outside Starlight pages (e.g. custom blog routes)
-}
+const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
 
 const { src, srcDarkmode }: { src?: string; srcDarkmode?: string } =
   Astro.props;

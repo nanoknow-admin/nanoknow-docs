@@ -3,12 +3,21 @@ import { getCollection } from "astro:content";
 
 export type BlogPost = CollectionEntry<"blog">;
 
+export interface BlogTopic {
+  label: string;
+  slug: string;
+}
+
 export function topicSlug(topic: string): string {
   return topic
     .trim()
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
+}
+
+export function topicHref(slug: string): string {
+  return `/blog/topics/${slug}/`;
 }
 
 export async function getPublishedPosts(): Promise<BlogPost[]> {
@@ -22,9 +31,7 @@ export async function getPublishedPosts(): Promise<BlogPost[]> {
   });
 }
 
-export async function getAllTopics(): Promise<
-  { label: string; slug: string }[]
-> {
+export async function getAllTopics(): Promise<BlogTopic[]> {
   const labels = new Map<string, string>();
 
   for (const post of await getPublishedPosts()) {
