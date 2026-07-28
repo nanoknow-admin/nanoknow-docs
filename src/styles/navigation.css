@@ -27,7 +27,7 @@
 }
 
 .navbar {
-  @apply relative flex flex-wrap items-center justify-between ;
+  @apply relative flex flex-wrap lg:flex-nowrap items-center justify-between;
 }
 .navbar-scrolled{
   @apply bg-lightmode-body dark:bg-body;

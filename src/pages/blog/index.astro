@@ -1,0 +1,17 @@
+---
+import BlogLayout from "@/layouts/BlogLayout.astro";
+import BlogListing from "@/components/blog/BlogListing.astro";
+import { getAllTopics, getPublishedPosts } from "@/lib/blog";
+
+const posts = await getPublishedPosts();
+const topics = await getAllTopics();
+---
+
+<BlogLayout
+  title="Blog"
+  description="News, updates, and insights from the NanoKnow community"
+>
+  <BlogListing posts={posts} topics={topics}>
+    The latest ideas and updates from the NanoKnow community.
+  </BlogListing>
+</BlogLayout>

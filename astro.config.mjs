@@ -56,6 +56,10 @@ export default defineConfig({
       alias: {
         "@": fileURLToPath(new URL("./src", import.meta.url)),
         "~": fileURLToPath(new URL("./src", import.meta.url)),
+        // Starlight internals used by the component overrides are not listed in
+        // its package `exports`, so they are reached by path rather than by
+        // specifier. This replaces the tsconfig `baseUrl` that used to resolve them.
+        "node_modules": fileURLToPath(new URL("./node_modules", import.meta.url)),
       },
     },
   },

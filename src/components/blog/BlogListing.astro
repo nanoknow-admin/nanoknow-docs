@@ -1,0 +1,66 @@
+---
+import type { BlogPost } from "@/lib/blog";
+import BlogPostCard from "./BlogPostCard.astro";
+import BlogTopicNav from "./BlogTopicNav.astro";
+
+interface Props {
+  posts: BlogPost[];
+  topics: { label: string; slug: string }[];
+  activeSlug?: string | null;
+}
+
+const { posts, topics, activeSlug = null } = Astro.props;
+---
+
+<!-- `not-content` keeps Starlight's prose styles off the listing chrome. -->
+<div class="not-content">
+  <section class="blog-header">
+    <h1 class="blog-header__title">Blog</h1>
+    <p class="blog-header__lead"><slot /></p>
+  </section>
+
+  <BlogTopicNav topics={topics} activeSlug={activeSlug} />
+
+  {
+    posts.length === 0 ? (
+      <p class="blog-empty">No posts yet — check back soon.</p>
+    ) : (
+      <div class="blog-list">
+        {posts.map((post) => (
+          <BlogPostCard post={post} />
+        ))}
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .blog-header {
+    margin: 0 0 1.75rem;
+  }
+
+  .blog-header__title {
+    margin: 0 0 0.5rem;
+    font-size: clamp(2.25rem, 4vw, 3rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--sl-color-white);
+  }
+
+  .blog-header__lead {
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.55;
+    color: var(--sl-color-gray-2);
+  }
+
+  .blog-header__lead :global(strong) {
+    color: var(--sl-color-white);
+    font-weight: 600;
+  }
+
+  .blog-empty {
+    color: var(--sl-color-gray-3);
+    font-size: 1.05rem;
+  }
+</style>

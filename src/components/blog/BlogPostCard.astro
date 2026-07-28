@@ -1,0 +1,176 @@
+---
+import type { BlogPost } from "@/lib/blog";
+import { estimateReadingMinutes, formatBlogDate } from "@/lib/blog";
+
+interface Props {
+  post: BlogPost;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, author, topics, heroImage, comingSoon } =
+  post.data;
+const minutes = estimateReadingMinutes(post.body ?? "");
+const topicLabel = topics[0];
+---
+
+<article class="post-row">
+  <a class="post-row__link" href={`/blog/${post.id}/`}>
+    <div
+      class:list={["post-row__media", heroImage && "post-row__media--photo"]}
+      aria-hidden="true"
+      style={heroImage ? `background-image: url('${heroImage.src}')` : undefined}
+    />
+
+    <div class="post-row__body">
+      {topicLabel && <p class="post-row__topic">{topicLabel}</p>}
+      <h2 class="post-row__title">{title}</h2>
+      <p class="post-row__excerpt">{description}</p>
+      <p class="post-row__meta">
+        {author}
+        <span aria-hidden="true">·</span>
+        {
+          comingSoon ? (
+            <span class="post-row__soon">Coming soon</span>
+          ) : (
+            <>
+              <time datetime={pubDate.toISOString()}>
+                {formatBlogDate(pubDate)}
+              </time>
+              <span aria-hidden="true">·</span>
+              {minutes} min read
+            </>
+          )
+        }
+      </p>
+    </div>
+
+    <span class="post-row__arrow" aria-hidden="true">→</span>
+  </a>
+</article>
+
+<style>
+  .post-row {
+    width: 100%;
+    min-width: 0;
+    border-top: 1px solid color-mix(in srgb, var(--sl-color-white) 10%, transparent);
+  }
+
+  .post-row:last-child {
+    border-bottom: 1px solid color-mix(in srgb, var(--sl-color-white) 10%, transparent);
+  }
+
+  .post-row__link {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr auto;
+    gap: 1.25rem;
+    align-items: center;
+    width: 100%;
+    min-width: 0;
+    padding: 1.35rem 0.25rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .post-row__link:hover {
+    background: color-mix(in srgb, var(--sl-color-white) 3%, transparent);
+  }
+
+  .post-row__link:hover .post-row__title,
+  .post-row__link:hover .post-row__arrow {
+    color: var(--color-primary);
+  }
+
+  .post-row__link:hover .post-row__arrow {
+    transform: translateX(3px);
+  }
+
+  /* Posts without a photo fall back to the NanoKnow mark. */
+  .post-row__media {
+    width: 7.5rem;
+    height: 5rem;
+    border-radius: 0.65rem;
+    border: 1px solid color-mix(in srgb, var(--sl-color-white) 10%, transparent);
+    background:
+      url("/Bulb_icon.png") no-repeat center / 2.5rem auto,
+      color-mix(in srgb, var(--sl-color-white) 4%, transparent);
+  }
+
+  .post-row__media--photo {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .post-row__body {
+    min-width: 0;
+  }
+
+  .post-row__topic {
+    margin: 0 0 0.35rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+
+  .post-row__title {
+    margin: 0 0 0.4rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--sl-color-white);
+  }
+
+  .post-row__excerpt {
+    margin: 0 0 0.65rem;
+    font-size: 0.975rem;
+    line-height: 1.55;
+    color: var(--sl-color-gray-2);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .post-row__meta {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    font-size: 0.8125rem;
+    color: var(--sl-color-gray-3);
+  }
+
+  .post-row__soon {
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+
+  .post-row__arrow {
+    font-size: 1.25rem;
+    color: var(--sl-color-gray-3);
+    transition: transform 0.15s ease, color 0.15s ease;
+  }
+
+  @media (max-width: 640px) {
+    .post-row__link {
+      grid-template-columns: 5.5rem 1fr;
+      gap: 0.9rem;
+      padding: 1.15rem 0;
+    }
+
+    .post-row__media {
+      width: 5.5rem;
+      height: 4.25rem;
+    }
+
+    .post-row__arrow {
+      display: none;
+    }
+
+    .post-row__title {
+      font-size: 1.05rem;
+    }
+  }
+</style>

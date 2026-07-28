@@ -1,0 +1,57 @@
+---
+interface Props {
+  topics: { label: string; slug: string }[];
+  activeSlug?: string | null;
+}
+
+const { topics, activeSlug = null } = Astro.props;
+
+const tabs = [
+  { label: "All", href: "/blog/", active: !activeSlug },
+  ...topics.map((topic) => ({
+    label: topic.label,
+    href: `/blog/topics/${topic.slug}/`,
+    active: activeSlug === topic.slug,
+  })),
+];
+---
+
+<nav class="topic-nav" aria-label="Blog topics">
+  {
+    tabs.map((tab) => (
+      <a class:list={["topic-tab", tab.active && "is-active"]} href={tab.href}>
+        {tab.label}
+      </a>
+    ))
+  }
+</nav>
+
+<style>
+  .topic-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0 0 2rem;
+  }
+
+  .topic-tab {
+    display: inline-flex;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: color-mix(in srgb, var(--sl-color-white) 72%, transparent);
+    border: 1px solid color-mix(in srgb, var(--sl-color-white) 14%, transparent);
+  }
+
+  .topic-tab:hover {
+    color: var(--sl-color-white);
+  }
+
+  .topic-tab.is-active {
+    color: var(--sl-color-black);
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+</style>
